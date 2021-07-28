@@ -50,7 +50,7 @@ requirements:
     - libglu                         # [linux]
     # deps
     - boost-cpp                      # [unix]
-    - boost-cpp 1.74                 # [win]
+    - boost-cpp 1.76                 # [win]
     - suitesparse
     - eigen
     - freeimage
