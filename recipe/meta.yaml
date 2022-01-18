@@ -12,8 +12,7 @@ source:
       - fix_build.patch
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
 
@@ -50,7 +49,8 @@ requirements:
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
     # deps
-    - boost-cpp
+    - boost-cpp                      # [not win]
+    - boost-cpp 1.76                 # [win]
     - suitesparse
     - eigen
     - freeimage
