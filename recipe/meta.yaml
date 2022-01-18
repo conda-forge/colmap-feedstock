@@ -1,5 +1,12 @@
 {% set name = "colmap" %}
 {% set version = "3.6" %}
+{% set build = 1 %}
+
+{% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
+{% set processor = "cpu" %}  # [osx]
+
+# Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
+{% set build = build + 100 if processor == "gpu" else build %}
 
 package:
   name: {{ name }}
@@ -12,8 +19,9 @@ source:
       - fix_build.patch
 
 build:
-  number: 0
+  number: {{ build }}
   skip: true  # [win]
+  string: {{ processor }}h{{ PKG_HASH }}_{{ build }}
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
 
@@ -21,6 +29,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
+    - {{ compiler('cuda') }}         # [not osx and cuda_compiler_version != "None"]
     - cmake
     - pkg-config
     - ninja
@@ -80,6 +89,7 @@ requirements:
     - xorg-libice                    # [unix]
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
+    - __cuda >={{ cuda_compiler_version }}  # [not osx and cuda_compiler_version != "None"]
 
 test:
   commands:
