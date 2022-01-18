@@ -49,8 +49,7 @@ requirements:
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
     # deps
-    - boost-cpp                      # [not win]
-    - boost-cpp 1.76                 # [win]
+    - boost-cpp
     - suitesparse
     - eigen
     - freeimage
