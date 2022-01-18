@@ -1,21 +1,25 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
 boost_cpp:
 - 1.74.0
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '11'
+- '7'
+cdt_name:
+- cos6
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- nvcc
 cuda_compiler_version:
-- None
+- '10.2'
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '11'
+- '7'
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-cuda:10.2
 flann:
 - 1.9.1
 gflags:
@@ -26,10 +30,6 @@ glog:
 - '0.5'
 gmp:
 - '6'
-llvm_openmp:
-- '11'
-macos_machine:
-- x86_64-apple-darwin13.4.0
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -52,9 +52,12 @@ sqlite:
 suitesparse:
 - '5'
 target_platform:
-- osx-64
+- linux-64
 vlfeat:
 - 0.9.20
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+  - cuda_compiler_version
+  - cdt_name
+  - docker_image
