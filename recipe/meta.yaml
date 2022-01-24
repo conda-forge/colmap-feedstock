@@ -1,5 +1,5 @@
 {% set name = "colmap" %}
-{% set version = "3.6" %}
+{% set version = "3.7" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: ea22d026a3b13d339551319f4562fe1471b7232433695970704669755031a192
+    sha256: 2e3e7fd5f371ee09b3f25f6f7ed0c1eb2508cc260388b53952a511decefbce24
     patches:
       - fix_build.patch
 
@@ -90,7 +90,7 @@ test:
 
 about:
   home: https://colmap.github.io/
-  license:  BSD-3-Clause
+  license: BSD-3-Clause
   license_file:
     - COPYING.txt
     - lib/Graclus/LICENSE
