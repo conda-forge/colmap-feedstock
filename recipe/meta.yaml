@@ -22,6 +22,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
+    - make                           # [unix]
     - pkg-config
     - ninja
     - llvm-openmp                    # [osx]
