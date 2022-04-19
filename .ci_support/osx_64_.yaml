@@ -5,15 +5,15 @@ boost_cpp:
 c_compiler:
 - clang
 c_compiler_version:
-- '11'
+- '12'
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '12'
 flann:
 - 1.9.1
 gflags:
@@ -25,7 +25,7 @@ glog:
 gmp:
 - '6'
 llvm_openmp:
-- '11'
+- '12'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pin_run_as_build:
