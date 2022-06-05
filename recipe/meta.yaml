@@ -60,8 +60,7 @@ requirements:
     - glew
     - cgal-cpp
     - ceres-solver
-    - qt-main                             # [not arm64]
-    - qt-main                        # [arm64]
+    - qt-main
     - git
     - flann
     - sqlite
