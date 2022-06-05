@@ -12,7 +12,7 @@ source:
       - fix_build.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
@@ -60,8 +60,7 @@ requirements:
     - glew
     - cgal-cpp
     - ceres-solver
-    - qt                             # [not arm64]
-    - qt-main                        # [arm64]
+    - qt-main
     - git
     - flann
     - sqlite
