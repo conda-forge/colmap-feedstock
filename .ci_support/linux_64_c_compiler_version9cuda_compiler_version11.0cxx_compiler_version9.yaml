@@ -27,7 +27,7 @@ gflags:
 glew:
 - '2.1'
 glog:
-- '0.5'
+- '0.6'
 gmp:
 - '6'
 pin_run_as_build:
