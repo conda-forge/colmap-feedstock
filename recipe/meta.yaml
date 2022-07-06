@@ -12,7 +12,7 @@ source:
       - fix_build.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
@@ -66,7 +66,6 @@ requirements:
     - sqlite
     - vlfeat
     - gmp                            # [unix]
-
   run:
     - boost-cpp
     - vlfeat
