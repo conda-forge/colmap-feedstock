@@ -50,7 +50,6 @@ if [[ "${HOST_PLATFORM}" != "${BUILD_PLATFORM}" ]] && [[ "${HOST_PLATFORM}" != l
 fi
 
 
-
 ( endgroup "Configuring conda" ) 2> /dev/null
 
 if [[ -f "${FEEDSTOCK_ROOT}/LICENSE.txt" ]]; then
