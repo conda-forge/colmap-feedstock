@@ -1,5 +1,5 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
+- '11.0'
 boost_cpp:
 - 1.74.0
 c_compiler:
@@ -27,7 +27,7 @@ gmp:
 llvm_openmp:
 - '13'
 macos_machine:
-- x86_64-apple-darwin13.4.0
+- arm64-apple-darwin20.0.0
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
@@ -48,7 +48,7 @@ sqlite:
 suitesparse:
 - '5'
 target_platform:
-- osx-64
+- osx-arm64
 vlfeat:
 - 0.9.21
 zip_keys:

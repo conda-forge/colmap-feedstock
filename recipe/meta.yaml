@@ -1,5 +1,5 @@
 {% set name = "colmap" %}
-{% set version = "3.6" %}
+{% set version = "3.7" %}
 
 package:
   name: {{ name }}
@@ -7,12 +7,12 @@ package:
 
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: ea22d026a3b13d339551319f4562fe1471b7232433695970704669755031a192
+    sha256: ceb7cca204550d65b890cd0082c66f4bc69193daf9da64616d8147a46b76cc55
     patches:
       - fix_build.patch
 
 build:
-  number: 1
+  number: 4
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
 
@@ -21,13 +21,14 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
+    - make                           # [unix]
     - pkg-config
     - ninja
     - llvm-openmp                    # [osx]
     - libgomp                        # [linux]
     # x11 stuff
-    - {{ cdt('mesa-libgl-devel') }}  # [unix]
-    - {{ cdt('mesa-dri-drivers') }}  # [unix]
+    - {{ cdt('mesa-libgl-devel') }}  # [unix and not arm64]
+    - {{ cdt('mesa-dri-drivers') }}  # [unix and not arm64]
     - {{ cdt('libselinux') }}        # [linux]
     - {{ cdt('libxcb') }}            # [linux]
     - {{ cdt('libxdamage') }}        # [linux]
@@ -58,13 +59,12 @@ requirements:
     - glew
     - cgal-cpp
     - ceres-solver
-    - qt
+    - qt-main
     - git
     - flann
     - sqlite
     - vlfeat
     - gmp                            # [unix]
-
   run:
     - boost-cpp
     - vlfeat
@@ -89,7 +89,7 @@ test:
 
 about:
   home: https://colmap.github.io/
-  license:  BSD-3-Clause
+  license: BSD-3-Clause
   license_file:
     - COPYING.txt
     - lib/Graclus/LICENSE
