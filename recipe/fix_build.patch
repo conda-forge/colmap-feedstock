@@ -1,77 +1,33 @@
-diff --git a/cmake/CMakeConfig.cmake.in b/cmake/CMakeConfig.cmake.in
-index 22f95b85..fbdce37c 100644
---- a/cmake/CMakeConfig.cmake.in
-+++ b/cmake/CMakeConfig.cmake.in
-@@ -110,6 +110,11 @@ else()
-     find_package(Glew REQUIRED)
- endif()
- 
-+find_package(SQLite3 REQUIRED)
-+find_package(VLFEAT REQUIRED)
-+find_package(PkgConfig REQUIRED)
-+pkg_check_modules (FLANN flann)
-+
- # Set the exported variables.
- 
- set(COLMAP_FOUND TRUE)
-@@ -136,6 +141,9 @@ set(COLMAP_INCLUDE_DIRS
-     ${METIS_INCLUDE_DIRS}
-     ${CERES_INCLUDE_DIRS}
-     ${GLEW_INCLUDE_DIRS}
-+    ${FLANN_INCLUDE_DIRS}
-+    ${SQLite3_INCLUDE_DIRS}
-+    ${VLFEAT_INCLUDE_DIRS}
- )
- 
- set(COLMAP_LINK_DIRS
-@@ -136,14 +136,14 @@ set(COLMAP_LINK_DIRS
- )
- 
- set(COLMAP_INTERNAL_LIBRARIES
--    flann
-+    # flann
-     graclus
-     lsd
-     pba
-     poisson_recon
--    sqlite3
-+    # sqlite3
-     sift_gpu
--    vlfeat
-+    # vlfeat
- )
- 
- set(COLMAP_EXTERNAL_LIBRARIES
-@@ -161,6 +169,9 @@ set(COLMAP_EXTERNAL_LIBRARIES
-     ${CERES_LIBRARIES}
-     ${OPENGL_LIBRARIES}
-     ${GLEW_LIBRARIES}
-+    ${FLANN_LIBRARIES}
-+    ${SQLite3_LIBRARIES}
-+    ${VLFEAT_LIBRARIES}
- )
- 
- if(UNIX)
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4759a942..4b93e860 100755
+old mode 100755
+new mode 100644
+index 7886d36..3f57631
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -109,6 +109,12 @@ find_package(OpenGL REQUIRED)
+@@ -48,7 +48,7 @@ include(CheckCXXCompilerFlag)
+ # Include helper macros and commands, and allow the included file to override
+ # the CMake policies in this file
+ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CMakeHelper.cmake NO_POLICY_SCOPE)
+-
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+ 
+ ################################################################################
+ # Options
+@@ -107,6 +107,11 @@ find_package(OpenGL REQUIRED)
  find_package(Glew REQUIRED)
  find_package(Git)
  
 +find_package(SQLite3 REQUIRED)
 +find_package(VLFEAT REQUIRED)
-+
 +find_package(PkgConfig REQUIRED)
 +pkg_check_modules (FLANN flann)
 +
  if(CGAL_ENABLED)
      set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE)
      find_package(CGAL QUIET)
-@@ -314,6 +320,9 @@ set(COLMAP_INCLUDE_DIRS
+@@ -311,6 +316,9 @@ set(COLMAP_INCLUDE_DIRS
+     ${FREEIMAGE_INCLUDE_DIRS}
      ${CERES_INCLUDE_DIRS}
-     ${METIS_INCLUDE_DIRS}
      ${GLEW_INCLUDE_DIRS}
 +    ${FLANN_INCLUDE_DIRS}
 +    ${SQLite3_INCLUDE_DIRS}
@@ -79,8 +35,8 @@ index 4759a942..4b93e860 100755
  )
  
  set(COLMAP_LINK_DIRS
-@@ -330,6 +339,9 @@ set(COLMAP_EXTERNAL_LIBRARIES
-     ${METIS_LIBRARIES}
+@@ -326,6 +334,9 @@ set(COLMAP_EXTERNAL_LIBRARIES
+     ${FREEIMAGE_LIBRARIES}
      ${CERES_LIBRARIES}
      ${OPENGL_LIBRARIES}
 +    ${FLANN_LIBRARIES}
@@ -89,7 +45,7 @@ index 4759a942..4b93e860 100755
  )
  
  if(OPENMP_FOUND)
-@@ -348,14 +348,14 @@ if(UNIX)
+@@ -348,14 +359,14 @@ if(UNIX)
  endif()
  
  set(COLMAP_INTERNAL_LIBRARIES
@@ -107,7 +63,7 @@ index 4759a942..4b93e860 100755
  )
  
  include_directories(
-@@ -374,14 +374,14 @@ add_subdirectory(src)
+@@ -374,14 +385,14 @@ add_subdirectory(src)
  # Generate source groups for Visual Studio, XCode, etc.
  ################################################################################
  
@@ -125,7 +81,7 @@ index 4759a942..4b93e860 100755
  
  COLMAP_ADD_SOURCE_DIR(src/base BASE_SRCS *.h *.cc)
  COLMAP_ADD_SOURCE_DIR(src/controllers CONTROLLERS_SRCS *.h *.cc)
-@@ -401,14 +401,14 @@ COLMAP_ADD_SOURCE_DIR(src/util UTIL_SRCS *.h *.cc)
+@@ -401,14 +412,14 @@ COLMAP_ADD_SOURCE_DIR(src/util UTIL_SRCS *.h *.cc)
  # intellisense can't find any of the included files).
  add_library(
      ${COLMAP_SRC_ROOT_FOLDER}
@@ -207,3 +163,43 @@ index 54aab8db7..ea9d0e4c7 100755
 +
 +MARK_AS_ADVANCED(VLFEAT_INCLUDE_DIR VLFEAT_LIBRARY VLFEAT_LIBRARIES)
 +
+diff --git a/lib/PoissonRecon/CMakeLists.txt b/lib/PoissonRecon/CMakeLists.txt
+index 7841eb6..9f27293 100644
+--- a/lib/PoissonRecon/CMakeLists.txt
++++ b/lib/PoissonRecon/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ if(NOT IS_MSVC)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -funroll-loops -ffast-math -std=c++11")
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -funroll-loops -ffast-math")
+ endif()
+ 
+ add_definitions("-DRELEASE")
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index e1821cd..5d8ba0b 100755
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -29,24 +29,6 @@
+ #
+ # Author: Johannes L. Schoenberger (jsch-at-demuc-dot-de)
+ 
+-if(IS_MSVC)
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W3")
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3")
+-elseif(IS_GNU OR IS_CLANG)
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+-    # We want c++14 mainly for supporting latest dependencies, but older GCC
+-    # versions in combination with CUDA do not yet support it. In the worst
+-    # case, this will lead to compile errors and there is not much we can
+-    # do on the COLMAP side.
+-    if(CUDA_ENABLED AND
+-       IS_GNU AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 6)
+-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+-    else()
+-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+-    endif()
+-endif()
+-
+ add_subdirectory(base)
+ add_subdirectory(controllers)
+ add_subdirectory(estimators)
