@@ -5,11 +5,15 @@ c_compiler:
 c_compiler_version:
 - '10'
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- nvcc
+cuda_compiler_version:
+- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -52,3 +56,6 @@ vlfeat:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+  - cuda_compiler_version
+  - cdt_name
+  - docker_image
