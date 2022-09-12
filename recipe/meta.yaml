@@ -21,7 +21,7 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [win or (osx and cuda_compiler_version != "None")]
+  skip: true  # [osx and cuda_compiler_version != "None"]
   string: {{ processor }}h{{ PKG_HASH }}_{{ build }}
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
