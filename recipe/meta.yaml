@@ -17,6 +17,7 @@ source:
     sha256: ceb7cca204550d65b890cd0082c66f4bc69193daf9da64616d8147a46b76cc55
     patches:
       - fix_build.patch
+      - unvendor_libs.patch  # [unix]
 
 build:
   number: {{ build }}
@@ -72,14 +73,14 @@ requirements:
     - ceres-solver
     - qt-main
     - git
-    - flann
-    - sqlite
-    - vlfeat
+    - flann                          # [unix]
+    - sqlite                         # [unix]
+    - vlfeat                         # [unix]
     - gmp                            # [unix]
   run:
     - boost-cpp
-    - vlfeat
-    - flann
+    - vlfeat                         # [unix]
+    - flann                          # [unix]
     - xorg-libxext                   # [unix]
     - xorg-libxdmcp                  # [unix]
     - xorg-libxau                    # [unix]
