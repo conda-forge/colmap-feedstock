@@ -62,6 +62,8 @@ requirements:
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
     # deps
+    - libblas
+    - libcblas
     - boost-cpp
     - suitesparse
     - eigen
