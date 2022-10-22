@@ -1,0 +1,156 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+old mode 100755
+new mode 100644
+index 7886d36..3f57631
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -107,6 +107,11 @@ find_package(OpenGL REQUIRED)
+ find_package(Glew REQUIRED)
+ find_package(Git)
+ 
++find_package(SQLite3 REQUIRED)
++find_package(VLFEAT REQUIRED)
++find_package(PkgConfig REQUIRED)
++pkg_check_modules (FLANN flann)
++
+ if(CGAL_ENABLED)
+     set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE)
+     find_package(CGAL QUIET)
+@@ -311,6 +316,9 @@ set(COLMAP_INCLUDE_DIRS
+     ${FREEIMAGE_INCLUDE_DIRS}
+     ${CERES_INCLUDE_DIRS}
+     ${GLEW_INCLUDE_DIRS}
++    ${FLANN_INCLUDE_DIRS}
++    ${SQLite3_INCLUDE_DIRS}
++    ${VLFEAT_INCLUDE_DIRS}
+ )
+ 
+ set(COLMAP_LINK_DIRS
+@@ -326,6 +334,9 @@ set(COLMAP_EXTERNAL_LIBRARIES
+     ${FREEIMAGE_LIBRARIES}
+     ${CERES_LIBRARIES}
+     ${OPENGL_LIBRARIES}
++    ${FLANN_LIBRARIES}
++    ${SQLite3_LIBRARIES}
++    ${VLFEAT_LIBRARIES}
+ )
+ 
+ if(OPENMP_FOUND)
+@@ -348,14 +359,14 @@ if(UNIX)
+ endif()
+ 
+ set(COLMAP_INTERNAL_LIBRARIES
+-    flann
++    # flann
+     graclus
+     lsd
+     pba
+     poisson_recon
+-    sqlite3
++    # sqlite3
+     sift_gpu
+-    vlfeat
++    # vlfeat
+ )
+ 
+ include_directories(
+@@ -374,14 +385,14 @@ add_subdirectory(src)
+ # Generate source groups for Visual Studio, XCode, etc.
+ ################################################################################
+ 
+-COLMAP_ADD_SOURCE_DIR(lib/FLANN LIB_FLANN_SRCS *.h *.cpp *.hpp *.cu)
++# COLMAP_ADD_SOURCE_DIR(lib/FLANN LIB_FLANN_SRCS *.h *.cpp *.hpp *.cu)
+ COLMAP_ADD_SOURCE_DIR(lib/Graclus LIB_GRACLUS_SRCS *.h *.c)
+ COLMAP_ADD_SOURCE_DIR(lib/LSD LIB_LSD_SRCS *.h *.c)
+ COLMAP_ADD_SOURCE_DIR(lib/PBA LIB_PBA_SRCS *.h *.cpp *.cu)
+ COLMAP_ADD_SOURCE_DIR(lib/PoissonRecon LIB_POISSON_RECON_SRCS *.h *.cpp *.inl)
+ COLMAP_ADD_SOURCE_DIR(lib/SiftGPU LIB_SIFT_GPU_SRCS *.h *.cpp *.cu)
+-COLMAP_ADD_SOURCE_DIR(lib/SQLite LIB_SQLITE_SRCS *.h *.c)
+-COLMAP_ADD_SOURCE_DIR(lib/VLFeat LIB_VLFEAT_SRCS *.h *.c *.tc)
++# COLMAP_ADD_SOURCE_DIR(lib/SQLite LIB_SQLITE_SRCS *.h *.c)
++# COLMAP_ADD_SOURCE_DIR(lib/VLFeat LIB_VLFEAT_SRCS *.h *.c *.tc)
+ 
+ COLMAP_ADD_SOURCE_DIR(src/base BASE_SRCS *.h *.cc)
+ COLMAP_ADD_SOURCE_DIR(src/controllers CONTROLLERS_SRCS *.h *.cc)
+@@ -401,14 +412,14 @@ COLMAP_ADD_SOURCE_DIR(src/util UTIL_SRCS *.h *.cc)
+ # intellisense can't find any of the included files).
+ add_library(
+     ${COLMAP_SRC_ROOT_FOLDER}
+-    ${LIB_FLANN_SRCS}
++    # ${LIB_FLANN_SRCS}
+     ${LIB_GRACLUS_SRCS}
+     ${LIB_LSD_SRCS}
+     ${LIB_PBA_SRCS}
+     ${LIB_POISSON_RECON_SRCS}
+     ${LIB_SIFT_GPU_SRCS}
+-    ${LIB_SQLITE_SRCS}
+-    ${LIB_VLFEAT_SRCS}
++    # ${LIB_SQLITE_SRCS}
++    # ${LIB_VLFEAT_SRCS}
+     ${BASE_SRCS}
+     ${CONTROLLERS_SRCS}
+     ${ESTIMATORS_SRCS}
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 54aab8db7..ea9d0e4c7 100755
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -35,11 +35,11 @@ elseif(IS_GNU OR IS_CLANG)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+ endif()
+ 
+-add_subdirectory(FLANN)
++# add_subdirectory(FLANN)
+ add_subdirectory(Graclus)
+ add_subdirectory(LSD)
+ add_subdirectory(PBA)
+ add_subdirectory(PoissonRecon)
+ add_subdirectory(SiftGPU)
+-add_subdirectory(SQLite)
+-add_subdirectory(VLFeat)
++# add_subdirectory(SQLite)
++# add_subdirectory(VLFeat)
+--- /dev/null	2021-07-26 16:13:59.421873396 +1000
++++ b/cmake/FindVLFEAT.cmake	2021-07-27 08:37:45.530591354 +1000
+@@ -0,0 +1,42 @@
++# - Find the VLFEAT library (http://www.vlfeat.org/)
++# If VLFEAT is installed in an unusual location, define VLFEAT_ROOT.
++# This module defines the following variables:
++#  VLFEAT_INCLUDE_DIR, where to find the VLFEAT include files
++#  VLFEAT_LIBRARIES, the libraries needed to use VLFEAT.
++#  VLFEAT_FOUND, If false, do not try to use VLFEAT.
++
++#=============================================================================
++# Copyright 2014 Roman Hiestand
++#
++# Distributed under the MIT License.
++#
++# This software is distributed WITHOUT ANY WARRANTY; without even the
++# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++# See the License for more information.
++#=============================================================================
++
++FIND_PATH(VLFEAT_INCLUDE_DIR vl/generic.h
++	PATHS
++		/usr/local/include
++		/usr/include
++		${VLFEAT_ROOT}/include
++	DOC "Location of VLFEAT Headers"
++)
++
++FIND_LIBRARY(VLFEAT_LIBRARY
++	NAMES vl libvl
++	PATHS /usr/lib /usr/local/lib ${VLFEAT_ROOT}/lib
++)
++
++# Handle the QUIETLY and REQUIRED arguments and set VLFEAT_FOUND to TRUE
++INCLUDE(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(VLFEAT DEFAULT_MSG
++	VLFEAT_LIBRARY VLFEAT_INCLUDE_DIR)
++
++IF(VLFEAT_FOUND)
++	SET(VLFEAT_LIBRARIES ${VLFEAT_LIBRARY})
++        SET(VLFEAT_INCLUDE_DIRS ${VLFEAT_INCLUDE_DIR})
++ENDIF(VLFEAT_FOUND)
++
++MARK_AS_ADVANCED(VLFEAT_INCLUDE_DIR VLFEAT_LIBRARY VLFEAT_LIBRARIES)
++

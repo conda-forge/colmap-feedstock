@@ -26,6 +26,10 @@ glog:
 - '0.6'
 gmp:
 - '6'
+libblas:
+- 3.9 *netlib
+libcblas:
+- 3.9 *netlib
 llvm_openmp:
 - '14'
 macos_machine:
@@ -35,12 +39,6 @@ pin_run_as_build:
     max_pin: x.x.x
   flann:
     max_pin: x.x.x
-  glew:
-    max_pin: x.x
-  gmp:
-    max_pin: x
-  sqlite:
-    max_pin: x
   vlfeat:
     max_pin: x.x.x
 qt_main:

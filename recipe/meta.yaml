@@ -17,10 +17,11 @@ source:
     sha256: ceb7cca204550d65b890cd0082c66f4bc69193daf9da64616d8147a46b76cc55
     patches:
       - fix_build.patch
+      - unvendor_libs.patch  # [unix]
 
 build:
   number: {{ build }}
-  skip: true  # [win or (osx and cuda_compiler_version != "None")]
+  skip: true  # [osx and cuda_compiler_version != "None"]
   string: {{ processor }}h{{ PKG_HASH }}_{{ build }}
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
@@ -61,6 +62,8 @@ requirements:
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
     # deps
+    - libblas
+    - libcblas
     - boost-cpp
     - suitesparse
     - eigen
@@ -72,14 +75,14 @@ requirements:
     - ceres-solver
     - qt-main
     - git
-    - flann
-    - sqlite
-    - vlfeat
+    - flann                          # [unix]
+    - sqlite                         # [unix]
+    - vlfeat                         # [unix]
     - gmp                            # [unix]
   run:
     - boost-cpp
-    - vlfeat
-    - flann
+    - vlfeat                         # [unix]
+    - flann                          # [unix]
     - xorg-libxext                   # [unix]
     - xorg-libxdmcp                  # [unix]
     - xorg-libxau                    # [unix]
