@@ -154,3 +154,67 @@ index 54aab8db7..ea9d0e4c7 100755
 +
 +MARK_AS_ADVANCED(VLFEAT_INCLUDE_DIR VLFEAT_LIBRARY VLFEAT_LIBRARIES)
 +
+diff --git a/cmake/CMakeConfig.cmake.in b/cmake/CMakeConfig.cmake.in
+index ce8ffde27..31fe7a1b2 100644
+--- a/cmake/CMakeConfig.cmake.in
++++ b/cmake/CMakeConfig.cmake.in
+@@ -83,6 +83,10 @@ if(COLMAP_FIND_QUIETLY)
+ 
+     find_package(OpenGL QUIET)
+     find_package(Glew QUIET)
++    find_package(SQLite3 QUIET)
++    find_package(VLFEAT QUIET)
++    find_package(PkgConfig QUIET)
++    pkg_check_modules (FLANN QUIET flann)
+ else()
+     find_package(Ceres REQUIRED)
+ 
+@@ -101,6 +105,10 @@ else()
+ 
+     find_package(OpenGL REQUIRED)
+     find_package(Glew REQUIRED)
++    find_package(SQLite3 REQUIRED)
++    find_package(VLFEAT REQUIRED)
++    find_package(PkgConfig REQUIRED)
++    pkg_check_modules (FLANN REQUIRED flann)
+ endif()
+ 
+ # Set the exported variables.
+@@ -128,6 +136,9 @@ set(COLMAP_INCLUDE_DIRS
+     ${FREEIMAGE_INCLUDE_DIRS}
+     ${CERES_INCLUDE_DIRS}
+     ${GLEW_INCLUDE_DIRS}
++    ${FLANN_INCLUDE_DIRS}
++    ${SQLite3_INCLUDE_DIRS}
++    ${VLFEAT_INCLUDE_DIRS}
+ )
+ 
+ set(COLMAP_LINK_DIRS
+@@ -136,14 +147,14 @@ set(COLMAP_LINK_DIRS
+ )
+ 
+ set(COLMAP_INTERNAL_LIBRARIES
+-    flann
++    # flann
+     graclus
+     lsd
+     pba
+     poisson_recon
+-    sqlite3
++    # sqlite3
+     sift_gpu
+-    vlfeat
++    # vlfeat
+ )
+ 
+ set(COLMAP_EXTERNAL_LIBRARIES
+@@ -153,6 +164,9 @@ set(COLMAP_EXTERNAL_LIBRARIES
+     ${CERES_LIBRARIES}
+     ${OPENGL_LIBRARIES}
+     ${GLEW_LIBRARIES}
++    ${FLANN_LIBRARIES}
++    ${SQLite3_LIBRARIES}
++    ${VLFEAT_LIBRARIES}
+ )
+ 
+ if(UNIX)
