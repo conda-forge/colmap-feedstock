@@ -5,17 +5,18 @@ cd build
 
 if [[ ! -z "${cuda_compiler_version+x}" && "${cuda_compiler_version}" != "None" ]]
  then
-     CUDA_ENABLED=ON
+     EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all -DCUDA_ENABLED=ON"
  else
-     CUDA_ENABLED=OFF
+     EXTRA_CMAKE_ARGS="-DCUDA_ENABLED=OFF"
  fi
 
 cmake ${CMAKE_ARGS} \
       -DCMAKE_BUILD_TYPE=Release \
       -DBOOST_STATIC=OFF \
-      -DCUDA_ENABLED=${CUDA_ENABLED} \
       -DBUILD_SHARED_LIBS=ON \
-      ..
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      ${EXTRA_CMAKE_ARGS} \
+..
 
 cmake --build . --config Release -- -j$CPU_COUNT
 cmake --build . --config Release --target install
