@@ -1,6 +1,10 @@
 mkdir build
 cd build
 
+if NOT "%cuda_compiler_version%"=="None" (
+    set EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all"
+)
+
 cmake ^
     -G "Ninja" ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
@@ -8,6 +12,7 @@ cmake ^
     -DBOOST_STATIC=OFF ^
     -DCUDA_ENABLED=OFF ^
     -DCMAKE_CXX_FLAGS=-DNOMINMAX ^
+    %EXTRA_CMAKE_ARGS% ^S
     %SRC_DIR%
 if errorlevel 1 exit 1
 
