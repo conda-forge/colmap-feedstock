@@ -14,7 +14,7 @@ package:
 
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: ceb7cca204550d65b890cd0082c66f4bc69193daf9da64616d8147a46b76cc55
+    sha256: 02288f8f61692fe38049d65608ed832b31246e7792692376afb712fa4cef8775
     patches:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
