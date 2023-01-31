@@ -79,6 +79,7 @@ requirements:
     - sqlite
     - vlfeat                         # [unix]
     - gmp                            # [unix]
+    - lz4
   run:
     - boost-cpp
     - vlfeat                         # [unix]
@@ -108,7 +109,6 @@ about:
   license: BSD-3-Clause
   license_file:
     - COPYING.txt
-    - lib/Graclus/LICENSE
     - lib/LSD/LICENSE
     - lib/PBA/LICENSE
     - lib/PoissonRecon/LICENSE
