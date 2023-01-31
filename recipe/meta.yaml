@@ -17,7 +17,7 @@ source:
     sha256: ceb7cca204550d65b890cd0082c66f4bc69193daf9da64616d8147a46b76cc55
     patches:
       - fix_build.patch
-      - unvendor_libs.patch  # [unix]
+      - unvendor_vlfeat.patch  # [unix]
 
 build:
   number: {{ build }}
