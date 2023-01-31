@@ -75,14 +75,14 @@ requirements:
     - ceres-solver
     - qt-main
     - git
-    - flann                          # [unix]
-    - sqlite                         # [unix]
+    - flann
+    - sqlite
     - vlfeat                         # [unix]
     - gmp                            # [unix]
   run:
     - boost-cpp
     - vlfeat                         # [unix]
-    - flann                          # [unix]
+    - flann
     - xorg-libxext                   # [unix]
     - xorg-libxdmcp                  # [unix]
     - xorg-libxau                    # [unix]
