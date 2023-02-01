@@ -12,7 +12,7 @@ cmake ^
     -DBOOST_STATIC=OFF ^
     -DCUDA_ENABLED=OFF ^
     -DCMAKE_CXX_FLAGS=-DNOMINMAX ^
-    -DMETIS_DIR=%PREFIX% ^
+    -DMETIS_DIR=%LIBRARY_PREFIX% ^
     %EXTRA_CMAKE_ARGS% ^
     %SRC_DIR%
 if errorlevel 1 exit 1
