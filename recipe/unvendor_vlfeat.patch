@@ -1,0 +1,156 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 45306424f..3f34209d4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -115,6 +115,8 @@ find_package(OpenGL REQUIRED)
+ find_package(Glew REQUIRED)
+ find_package(Git)
+ 
++find_package(VLFEAT REQUIRED)
++
+ if(CGAL_ENABLED)
+     set(CGAL_DO_NOT_WARN_ABOUT_CMAKE_BUILD_TYPE TRUE)
+     # We do not use CGAL data. This prevents an unnecessary warning by CMake.
+@@ -358,6 +360,7 @@ set(COLMAP_INCLUDE_DIRS
+     ${METIS_INCLUDE_DIRS}
+     ${GLEW_INCLUDE_DIRS}
+     ${SQLite3_INCLUDE_DIRS}
++    ${VLFEAT_INCLUDE_DIRS}
+ )
+ 
+ set(COLMAP_LINK_DIRS
+@@ -377,6 +380,7 @@ set(COLMAP_EXTERNAL_LIBRARIES
+     ${CERES_LIBRARIES}
+     ${OPENGL_LIBRARIES}
+     ${SQLite3_LIBRARIES}
++    ${VLFEAT_LIBRARIES}
+ )
+ 
+ if(OPENMP_FOUND)
+@@ -403,7 +407,7 @@ set(COLMAP_INTERNAL_LIBRARIES
+     pba
+     poisson_recon
+     sift_gpu
+-    vlfeat
++    # vlfeat
+ )
+ 
+ include_directories(
+@@ -426,7 +430,7 @@ COLMAP_ADD_SOURCE_DIR(lib/LSD LIB_LSD_SRCS *.h *.c)
+ COLMAP_ADD_SOURCE_DIR(lib/PBA LIB_PBA_SRCS *.h *.cpp *.cu)
+ COLMAP_ADD_SOURCE_DIR(lib/PoissonRecon LIB_POISSON_RECON_SRCS *.h *.cpp *.inl)
+ COLMAP_ADD_SOURCE_DIR(lib/SiftGPU LIB_SIFT_GPU_SRCS *.h *.cpp *.cu)
+-COLMAP_ADD_SOURCE_DIR(lib/VLFeat LIB_VLFEAT_SRCS *.h *.c *.tc)
++# COLMAP_ADD_SOURCE_DIR(lib/VLFeat LIB_VLFEAT_SRCS *.h *.c *.tc)
+ 
+ COLMAP_ADD_SOURCE_DIR(src/base BASE_SRCS *.h *.cc)
+ COLMAP_ADD_SOURCE_DIR(src/controllers CONTROLLERS_SRCS *.h *.cc)
+@@ -450,7 +454,7 @@ add_library(
+     ${LIB_PBA_SRCS}
+     ${LIB_POISSON_RECON_SRCS}
+     ${LIB_SIFT_GPU_SRCS}
+-    ${LIB_VLFEAT_SRCS}
++    # ${LIB_VLFEAT_SRCS}
+     ${BASE_SRCS}
+     ${CONTROLLERS_SRCS}
+     ${ESTIMATORS_SRCS}
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 633ecd195..a6c26e73e 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -39,4 +39,4 @@ add_subdirectory(LSD)
+ add_subdirectory(PBA)
+ add_subdirectory(PoissonRecon)
+ add_subdirectory(SiftGPU)
+-add_subdirectory(VLFeat)
++# add_subdirectory(VLFeat)
+--- /dev/null	2021-07-26 16:13:59.421873396 +1000
++++ b/cmake/FindVLFEAT.cmake	2021-07-27 08:37:45.530591354 +1000
+@@ -0,0 +1,42 @@
++# - Find the VLFEAT library (http://www.vlfeat.org/)
++# If VLFEAT is installed in an unusual location, define VLFEAT_ROOT.
++# This module defines the following variables:
++#  VLFEAT_INCLUDE_DIR, where to find the VLFEAT include files
++#  VLFEAT_LIBRARIES, the libraries needed to use VLFEAT.
++#  VLFEAT_FOUND, If false, do not try to use VLFEAT.
++
++#=============================================================================
++# Copyright 2014 Roman Hiestand
++#
++# Distributed under the MIT License.
++#
++# This software is distributed WITHOUT ANY WARRANTY; without even the
++# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
++# See the License for more information.
++#=============================================================================
++
++FIND_PATH(VLFEAT_INCLUDE_DIR vl/generic.h
++	PATHS
++		/usr/local/include
++		/usr/include
++		${VLFEAT_ROOT}/include
++	DOC "Location of VLFEAT Headers"
++)
++
++FIND_LIBRARY(VLFEAT_LIBRARY
++	NAMES vl libvl
++	PATHS /usr/lib /usr/local/lib ${VLFEAT_ROOT}/lib
++)
++
++# Handle the QUIETLY and REQUIRED arguments and set VLFEAT_FOUND to TRUE
++INCLUDE(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(VLFEAT DEFAULT_MSG
++	VLFEAT_LIBRARY VLFEAT_INCLUDE_DIR)
++
++IF(VLFEAT_FOUND)
++	SET(VLFEAT_LIBRARIES ${VLFEAT_LIBRARY})
++        SET(VLFEAT_INCLUDE_DIRS ${VLFEAT_INCLUDE_DIR})
++ENDIF(VLFEAT_FOUND)
++
++MARK_AS_ADVANCED(VLFEAT_INCLUDE_DIR VLFEAT_LIBRARY VLFEAT_LIBRARIES)
++
+diff --git a/cmake/CMakeConfig.cmake.in b/cmake/CMakeConfig.cmake.in
+index d6133f027..2e5dded8b 100644
+--- a/cmake/CMakeConfig.cmake.in
++++ b/cmake/CMakeConfig.cmake.in
+@@ -102,6 +102,7 @@ if(COLMAP_FIND_QUIETLY)
+ 
+     find_package(OpenGL QUIET)
+     find_package(Glew QUIET)
++    find_package(VLFEAT QUIET)
+ else()
+     find_package(Ceres REQUIRED)
+ 
+@@ -127,6 +128,7 @@ else()
+ 
+     find_package(OpenGL REQUIRED)
+     find_package(Glew REQUIRED)
++    find_package(VLFEAT REQUIRED)
+ endif()
+ 
+ # Set the exported variables.
+@@ -158,6 +160,7 @@ set(COLMAP_INCLUDE_DIRS
+     ${CERES_INCLUDE_DIRS}
+     ${GLEW_INCLUDE_DIRS}
+     ${SQLite3_INCLUDE_DIRS}
++    ${VLFEAT_INCLUDE_DIRS}
+ )
+ 
+ set(COLMAP_LINK_DIRS
+@@ -171,7 +174,7 @@ set(COLMAP_INTERNAL_LIBRARIES
+     poisson_recon
+     sqlite3
+     sift_gpu
+-    vlfeat
++    # vlfeat
+ )
+ 
+ set(COLMAP_EXTERNAL_LIBRARIES
+@@ -185,6 +188,7 @@ set(COLMAP_EXTERNAL_LIBRARIES
+     ${OPENGL_LIBRARIES}
+     ${GLEW_LIBRARIES}
+     ${SQLite3_LIBRARIES}
++    ${VLFEAT_LIBRARIES}
+ )
+ 
+ if(UNIX)

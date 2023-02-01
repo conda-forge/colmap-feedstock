@@ -1,6 +1,6 @@
 {% set name = "colmap" %}
-{% set version = "3.7" %}
-{% set build = 7 %}
+{% set version = "3.8" %}
+{% set build = 0 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -14,10 +14,11 @@ package:
 
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: ceb7cca204550d65b890cd0082c66f4bc69193daf9da64616d8147a46b76cc55
+    sha256: 02288f8f61692fe38049d65608ed832b31246e7792692376afb712fa4cef8775
     patches:
       - fix_build.patch
-      - unvendor_libs.patch  # [unix]
+      - unvendor_vlfeat.patch  # [unix]
+      - fix_find_lz4.patch
 
 build:
   number: {{ build }}
@@ -75,14 +76,16 @@ requirements:
     - ceres-solver
     - qt-main
     - git
-    - flann                          # [unix]
-    - sqlite                         # [unix]
+    - flann
+    - sqlite
     - vlfeat                         # [unix]
     - gmp                            # [unix]
+    - lz4-c
+    - metis
   run:
     - boost-cpp
     - vlfeat                         # [unix]
-    - flann                          # [unix]
+    - flann
     - xorg-libxext                   # [unix]
     - xorg-libxdmcp                  # [unix]
     - xorg-libxau                    # [unix]
@@ -108,7 +111,6 @@ about:
   license: BSD-3-Clause
   license_file:
     - COPYING.txt
-    - lib/Graclus/LICENSE
     - lib/LSD/LICENSE
     - lib/PBA/LICENSE
     - lib/PoissonRecon/LICENSE
