@@ -19,7 +19,6 @@ source:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
-      # - fix_find_metis.patch
 
 build:
   number: {{ build }}
