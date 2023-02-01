@@ -18,6 +18,7 @@ source:
     patches:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
+      - fix_find_lz4.patch
 
 build:
   number: {{ build }}
