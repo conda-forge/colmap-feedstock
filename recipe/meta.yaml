@@ -82,6 +82,7 @@ requirements:
     - vlfeat                         # [unix]
     - gmp                            # [unix]
     - lz4-c
+    - metis
   run:
     - boost-cpp
     - vlfeat                         # [unix]
