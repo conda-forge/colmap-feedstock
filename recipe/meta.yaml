@@ -19,6 +19,7 @@ source:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
+      - fix_find_metis.patch
 
 build:
   number: {{ build }}
@@ -80,7 +81,7 @@ requirements:
     - sqlite
     - vlfeat                         # [unix]
     - gmp                            # [unix]
-    - lz4
+    - lz4-c
   run:
     - boost-cpp
     - vlfeat                         # [unix]
