@@ -30,6 +30,8 @@ libblas:
 - 3.9 *netlib
 libcblas:
 - 3.9 *netlib
+libxcb:
+- '1.15'
 llvm_openmp:
 - '15'
 lz4_c:

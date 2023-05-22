@@ -36,6 +36,8 @@ libblas:
 - 3.9 *netlib
 libcblas:
 - 3.9 *netlib
+libxcb:
+- '1.15'
 lz4_c:
 - 1.9.3
 metis:
