@@ -82,6 +82,7 @@ requirements:
     - gmp                            # [unix]
     - lz4-c
     - metis
+    - libcurand-dev      # [cuda_compiler_version == "12.0"]
   run:
     - boost-cpp
     - vlfeat                         # [unix]
