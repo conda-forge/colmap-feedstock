@@ -19,6 +19,7 @@ source:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
+      - 1840.patch  # [cuda_compiler_version == "12.0"]
 
 build:
   number: {{ build }}
@@ -82,7 +83,7 @@ requirements:
     - gmp                            # [unix]
     - lz4-c
     - metis
-    - libcurand-dev      # [cuda_compiler_version == "12.0"]
+    - libcurand-dev                  # [cuda_compiler_version == "12.0"]
   run:
     - boost-cpp
     - vlfeat                         # [unix]
