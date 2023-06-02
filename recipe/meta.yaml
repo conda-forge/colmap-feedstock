@@ -20,6 +20,9 @@ source:
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
       - 1840.patch  # [cuda_compiler_version == "12.0"]
+      - 1823.patch  # [cuda_compiler_version == "12.0"]
+      - 1838.patch  # [cuda_compiler_version == "12.0"]
+      - 1841.patch  # [cuda_compiler_version == "12.0"]
 
 build:
   number: {{ build }}
