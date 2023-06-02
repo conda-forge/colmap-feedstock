@@ -68,30 +68,30 @@ index 2a9724e15..e4d6e436b 100644
      # Explicitly set PIC flags for CUDA targets.
      if(NOT IS_MSVC)
          set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --compiler-options -fPIC")
-@@ -400,7 +400,6 @@ endif()
+@@ -404,7 +404,6 @@ endif()
  
  set(COLMAP_INTERNAL_LIBRARIES
      lsd
 -    pba
      poisson_recon
      sift_gpu
-     vlfeat
-@@ -423,7 +422,6 @@ add_subdirectory(src)
+     # vlfeat
+@@ -427,7 +426,6 @@ add_subdirectory(src)
  ################################################################################
  
  COLMAP_ADD_SOURCE_DIR(lib/LSD LIB_LSD_SRCS *.h *.c)
 -COLMAP_ADD_SOURCE_DIR(lib/PBA LIB_PBA_SRCS *.h *.cpp *.cu)
  COLMAP_ADD_SOURCE_DIR(lib/PoissonRecon LIB_POISSON_RECON_SRCS *.h *.cpp *.inl)
  COLMAP_ADD_SOURCE_DIR(lib/SiftGPU LIB_SIFT_GPU_SRCS *.h *.cpp *.cu)
- COLMAP_ADD_SOURCE_DIR(lib/VLFeat LIB_VLFEAT_SRCS *.h *.c *.tc)
-@@ -447,7 +445,6 @@ COLMAP_ADD_SOURCE_DIR(src/util UTIL_SRCS *.h *.cc)
+ # COLMAP_ADD_SOURCE_DIR(lib/VLFeat LIB_VLFEAT_SRCS *.h *.c *.tc)
+@@ -451,7 +449,6 @@ COLMAP_ADD_SOURCE_DIR(src/util UTIL_SRCS *.h *.cc)
  add_library(
      ${COLMAP_SRC_ROOT_FOLDER}
      ${LIB_LSD_SRCS}
 -    ${LIB_PBA_SRCS}
      ${LIB_POISSON_RECON_SRCS}
      ${LIB_SIFT_GPU_SRCS}
-     ${LIB_VLFEAT_SRCS}
+     # ${LIB_VLFEAT_SRCS}
 diff --git a/cmake/CMakeConfig.cmake.in b/cmake/CMakeConfig.cmake.in
 index d6133f027..755fcab32 100644
 --- a/cmake/CMakeConfig.cmake.in
@@ -136,7 +136,7 @@ index cdf6701e1..fcd071523 100755
  Ideally, the reconstruction works fine and all images are registered. If this is
  not the case, it is recommended to:
 diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
-index 633ecd195..fed46349b 100644
+index a6c26e7..a61e438 100644
 --- a/lib/CMakeLists.txt
 +++ b/lib/CMakeLists.txt
 @@ -36,7 +36,6 @@ elseif(IS_GNU OR IS_CLANG)
@@ -146,7 +146,7 @@ index 633ecd195..fed46349b 100644
 -add_subdirectory(PBA)
  add_subdirectory(PoissonRecon)
  add_subdirectory(SiftGPU)
- add_subdirectory(VLFeat)
+ # add_subdirectory(VLFeat)
 diff --git a/lib/PBA/CMakeLists.txt b/lib/PBA/CMakeLists.txt
 deleted file mode 100644
 index 2473436e6..000000000
