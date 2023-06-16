@@ -118,7 +118,7 @@ about:
   license_file:
     - COPYING.txt
     - lib/LSD/LICENSE
-    - lib/PBA/LICENSE
+    - lib/PBA/LICENSE  # [cuda_compiler_version != "12.0"]
     - lib/PoissonRecon/LICENSE
     - lib/SiftGPU/LICENSE
   summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
