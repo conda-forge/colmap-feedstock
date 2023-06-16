@@ -1,6 +1,6 @@
 {% set name = "colmap" %}
 {% set version = "3.8" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -19,6 +19,11 @@ source:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
+      - 1809.patch  # [cuda_compiler_version == "12.0"]
+      - 1840.patch  # [cuda_compiler_version == "12.0"]
+      - 1823.patch  # [cuda_compiler_version == "12.0"]
+      - 1838.patch  # [cuda_compiler_version == "12.0"]
+      - 1841.patch  # [cuda_compiler_version == "12.0"]
 
 build:
   number: {{ build }}
@@ -82,6 +87,7 @@ requirements:
     - gmp                            # [unix]
     - lz4-c
     - metis
+    - libcurand-dev                  # [cuda_compiler_version == "12.0"]
   run:
     - boost-cpp
     - vlfeat                         # [unix]
@@ -112,7 +118,7 @@ about:
   license_file:
     - COPYING.txt
     - lib/LSD/LICENSE
-    - lib/PBA/LICENSE
+    - lib/PBA/LICENSE  # [cuda_compiler_version != "12.0"]
     - lib/PoissonRecon/LICENSE
     - lib/SiftGPU/LICENSE
   summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
