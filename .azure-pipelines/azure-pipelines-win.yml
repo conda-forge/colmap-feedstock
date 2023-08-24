@@ -8,20 +8,11 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_cuda_compilerNonecuda_compiler_versionNone:
-        CONFIG: win_64_cuda_compilerNonecuda_compiler_versionNone
+      win_64_cuda_compiler_version11.2:
+        CONFIG: win_64_cuda_compiler_version11.2
         UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilernvcccuda_compiler_version10.2:
-        CONFIG: win_64_cuda_compilernvcccuda_compiler_version10.2
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilernvcccuda_compiler_version11.0:
-        CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.0
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilernvcccuda_compiler_version11.1:
-        CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.1
-        UPLOAD_PACKAGES: 'True'
-      win_64_cuda_compilernvcccuda_compiler_version11.2:
-        CONFIG: win_64_cuda_compilernvcccuda_compiler_version11.2
+      win_64_cuda_compiler_versionNone:
+        CONFIG: win_64_cuda_compiler_versionNone
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:
@@ -72,7 +63,10 @@ jobs:
         if EXIST LICENSE.txt (
           copy LICENSE.txt "recipe\\recipe-scripts-license.txt"
         )
-        conda.exe mambabuild "recipe" -m .ci_support\%CONFIG%.yaml --suppress-variables
+        if NOT [%HOST_PLATFORM%] == [%BUILD_PLATFORM%] (
+          set "EXTRA_CB_OPTIONS=%EXTRA_CB_OPTIONS% --no-test"
+        )
+        conda.exe mambabuild "recipe" -m .ci_support\%CONFIG%.yaml --suppress-variables %EXTRA_CB_OPTIONS%
       displayName: Build recipe
       env:
         PYTHONUNBUFFERED: 1
