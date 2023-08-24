@@ -10,3 +10,5 @@ github:
 os_version:
   linux_64: cos7
 test_on_native_only: true
+azure:
+  free_disk_space: true
