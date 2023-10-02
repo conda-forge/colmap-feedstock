@@ -1,9 +1,11 @@
-boost_cpp:
-- 1.78.0
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 c_compiler:
 - gcc
 c_compiler_version:
-- '11'
+- '10'
+cdt_arch:
+- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -13,13 +15,13 @@ channel_targets:
 cuda_compiler:
 - nvcc
 cuda_compiler_version:
-- '11.8'
+- '11.2'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '11'
+- '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-cuda:11.8
+- quay.io/condaforge/linux-anvil-cuda:11.2
 flann:
 - 1.9.1
 gflags:
@@ -32,6 +34,8 @@ gmp:
 - '6'
 libblas:
 - 3.9 *netlib
+libboost_devel:
+- '1.82'
 libcblas:
 - 3.9 *netlib
 libxcb:
@@ -41,8 +45,6 @@ lz4_c:
 metis:
 - '5.1'
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   flann:
     max_pin: x.x.x
   vlfeat:
@@ -54,7 +56,7 @@ sqlite:
 suitesparse:
 - '5'
 target_platform:
-- linux-64
+- linux-aarch64
 vlfeat:
 - 0.9.21
 zip_keys:
