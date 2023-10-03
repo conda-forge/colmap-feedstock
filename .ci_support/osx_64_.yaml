@@ -1,7 +1,5 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
-boost_cpp:
-- 1.78.0
 c_compiler:
 - clang
 c_compiler_version:
@@ -28,6 +26,8 @@ gmp:
 - '6'
 libblas:
 - 3.9 *netlib
+libboost_devel:
+- '1.82'
 libcblas:
 - 3.9 *netlib
 libxcb:
@@ -41,8 +41,6 @@ macos_machine:
 metis:
 - '5.1'
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   flann:
     max_pin: x.x.x
   vlfeat:

@@ -1,5 +1,3 @@
-boost_cpp:
-- 1.78.0
 c_compiler:
 - vs2019
 channel_sources:
@@ -22,6 +20,8 @@ glog:
 - '0.6'
 libblas:
 - 3.9 *netlib
+libboost_devel:
+- '1.82'
 libcblas:
 - 3.9 *netlib
 lz4_c:
@@ -29,8 +29,6 @@ lz4_c:
 metis:
 - '5.1'
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   flann:
     max_pin: x.x.x
 qt_main:
