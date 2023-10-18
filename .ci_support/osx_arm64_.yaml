@@ -3,7 +3,7 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '16'
+- '15'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,7 +13,7 @@ cuda_compiler_version:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '15'
 flann:
 - 1.9.1
 gflags:
