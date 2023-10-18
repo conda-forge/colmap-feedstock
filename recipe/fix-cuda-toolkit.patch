@@ -2,14 +2,6 @@ diff --git a/cmake/CMakeConfig.cmake.in b/cmake/CMakeConfig.cmake.in
 index 2e5dded..4b1405f 100644
 --- a/cmake/CMakeConfig.cmake.in
 +++ b/cmake/CMakeConfig.cmake.in
-@@ -170,7 +170,6 @@ set(COLMAP_LINK_DIRS
- 
- set(COLMAP_INTERNAL_LIBRARIES
-     lsd
--    pba
-     poisson_recon
-     sqlite3
-     sift_gpu
 @@ -208,7 +207,11 @@ if(COLMAP_OPENMP_ENABLED)
  endif()
  
