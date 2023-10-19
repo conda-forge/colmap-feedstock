@@ -4,16 +4,17 @@ mkdir build
 cd build
 
 if [[ ! -z "${cuda_compiler_version+x}" && "${cuda_compiler_version}" != "None" ]]
- then
-     EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all -DCUDA_ENABLED=ON"
- else
-     EXTRA_CMAKE_ARGS="-DCUDA_ENABLED=OFF"
- fi
+  then
+    EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all -DCUDA_ENABLED=ON"
+  else
+    EXTRA_CMAKE_ARGS="-DCUDA_ENABLED=OFF"
+fi
 
 cmake ${CMAKE_ARGS} \
       -DCMAKE_BUILD_TYPE=Release \
       -DBOOST_STATIC=OFF \
       -DBUILD_SHARED_LIBS=OFF \
+      -DCMAKE_CXX_FLAGS="-D_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION" \
       ${EXTRA_CMAKE_ARGS} \
 ..
 
