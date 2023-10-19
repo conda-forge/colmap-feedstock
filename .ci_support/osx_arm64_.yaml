@@ -33,7 +33,7 @@ libcblas:
 libxcb:
 - '1.15'
 llvm_openmp:
-- '16'
+- '15'
 lz4_c:
 - 1.9.3
 macos_machine:
