@@ -11,7 +11,7 @@ cuda_compiler_version:
 cxx_compiler:
 - vs2019
 flann:
-- 1.9.1
+- 1.9.2
 gflags:
 - '2.2'
 glew:

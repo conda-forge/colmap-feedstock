@@ -23,7 +23,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-cuda:11.8
 flann:
-- 1.9.1
+- 1.9.2
 gflags:
 - '2.2'
 glew:
