@@ -5,13 +5,13 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- None
+- nvcc
 cuda_compiler_version:
-- None
+- '11.8'
 cxx_compiler:
 - vs2019
 flann:
-- 1.9.1
+- 1.9.2
 gflags:
 - '2.2'
 glew:
