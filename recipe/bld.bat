@@ -1,8 +1,12 @@
 mkdir build
 cd build
 
+set EXTRA_CMAKE_ARGS=""
 if NOT "%cuda_compiler_version%"=="None" (
     set EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all"
+    set CUDA_ENABLED=ON
+) else (
+    set CUDA_ENABLED=OFF
 )
 
 cmake ^
@@ -10,7 +14,7 @@ cmake ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DBOOST_STATIC=OFF ^
-    -DCUDA_ENABLED=OFF ^
+    -DCUDA_ENABLED=%CUDA_ENABLED% ^
     -DCMAKE_CXX_FLAGS=-DNOMINMAX ^
     -DMETIS_DIR=%LIBRARY_PREFIX% ^
     %EXTRA_CMAKE_ARGS% ^
