@@ -1,6 +1,6 @@
 {% set name = "colmap" %}
 {% set version = "3.8" %}
-{% set build = 7 %}
+{% set build = 8 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -28,7 +28,6 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [osx and cuda_compiler_version != "None"]
   string: {{ processor }}h{{ PKG_HASH }}_{{ build }}
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
@@ -37,7 +36,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
-    - {{ compiler('cuda') }}         # [not osx and cuda_compiler_version != "None"]
+    - {{ compiler('cuda') }}         # [(cuda_compiler or "None") != "None"]
     - cmake
     - make                           # [unix]
     - pkg-config
@@ -89,6 +88,7 @@ requirements:
     - lz4-c
     - metis
     - libcurand-dev                  # [cuda_compiler_version == "12.0"]
+    - cuda-cudart-dev                # [win and cuda_compiler_version == "12.0"]
   run:
     - vlfeat                         # [unix]
     - flann
@@ -102,14 +102,15 @@ requirements:
     - xorg-libice                    # [unix]
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
-    - __cuda >={{ cuda_compiler_version }}  # [not osx and cuda_compiler_version != "None"]
+    - __cuda >={{ cuda_compiler_version }}  # [(cuda_compiler or "None") != "None"]
 
 test:
   commands:
     - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)  # [win]
+    - if exist %PREFIX%\\Library\\lib\\colmap\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler or "None") != "None"]
     - test -f $PREFIX/bin/colmap  # [unix]
     - test -f $PREFIX/lib/colmap/libcolmap.a  # [unix]
-    - test -f $PREFIX/lib/colmap/libcolmap_cuda.a  # [unix and cuda_compiler_version != "None"]
+    - test -f $PREFIX/lib/colmap/libcolmap_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
     - test -f $PREFIX/share/colmap/COLMAPConfig.cmake  # [unix]
 
 about:
