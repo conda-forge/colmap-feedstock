@@ -2,16 +2,19 @@ diff --git a/cmake/CMakeConfig.cmake.in b/cmake/CMakeConfig.cmake.in
 index 2e5dded..4b1405f 100644
 --- a/cmake/CMakeConfig.cmake.in
 +++ b/cmake/CMakeConfig.cmake.in
-@@ -208,7 +207,11 @@ if(COLMAP_OPENMP_ENABLED)
+@@ -208,8 +207,13 @@ if(COLMAP_OPENMP_ENABLED)
  endif()
  
  if(COLMAP_CUDA_ENABLED)
 -    find_package(CUDA ${COLMAP_CUDA_MIN_VERSION} QUIET)
+-    list(APPEND COLMAP_EXTERNAL_LIBRARIES ${CUDA_LIBRARIES})
 +    if(${CMAKE_VERSION} VERSION_LESS "3.17.0")
 +       find_package(CUDA ${COLMAP_CUDA_MIN_VERSION} QUIET)
++        list(APPEND COLMAP_EXTERNAL_LIBRARIES ${CUDA_LIBRARIES})
 +    else()
 +       find_package(CUDAToolkit ${COLMAP_CUDA_MIN_VERSION} QUIET)
++        list(APPEND COLMAP_EXTERNAL_LIBRARIES CUDA::cudart)
 +    endif()
-     list(APPEND COLMAP_EXTERNAL_LIBRARIES ${CUDA_LIBRARIES})
      list(APPEND COLMAP_INTERNAL_LIBRARIES colmap_cuda)
  endif()
+ 
