@@ -3,7 +3,7 @@ c_compiler:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge colmap_dev
 cuda_compiler:
 - None
 cuda_compiler_version:

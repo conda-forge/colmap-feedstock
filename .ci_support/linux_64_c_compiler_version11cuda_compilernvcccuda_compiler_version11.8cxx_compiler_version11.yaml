@@ -7,7 +7,7 @@ cdt_name:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge colmap_dev
 cuda_compiler:
 - nvcc
 cuda_compiler_version:

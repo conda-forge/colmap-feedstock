@@ -142,14 +142,14 @@ Current release info
 Installing colmap
 =================
 
-Installing `colmap` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `colmap` from the `conda-forge/label/colmap_dev` channel can be achieved by adding `conda-forge/label/colmap_dev` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/colmap_dev
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `colmap` can be installed with `conda`:
+Once the `conda-forge/label/colmap_dev` channel has been enabled, `colmap` can be installed with `conda`:
 
 ```
 conda install colmap
@@ -164,26 +164,26 @@ mamba install colmap
 It is possible to list all of the versions of `colmap` available on your platform with `conda`:
 
 ```
-conda search colmap --channel conda-forge
+conda search colmap --channel conda-forge/label/colmap_dev
 ```
 
 or with `mamba`:
 
 ```
-mamba search colmap --channel conda-forge
+mamba search colmap --channel conda-forge/label/colmap_dev
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search colmap --channel conda-forge
+mamba repoquery search colmap --channel conda-forge/label/colmap_dev
 
 # List packages depending on `colmap`:
-mamba repoquery whoneeds colmap --channel conda-forge
+mamba repoquery whoneeds colmap --channel conda-forge/label/colmap_dev
 
 # List dependencies of `colmap`:
-mamba repoquery depends colmap --channel conda-forge
+mamba repoquery depends colmap --channel conda-forge/label/colmap_dev
 ```
 
 
