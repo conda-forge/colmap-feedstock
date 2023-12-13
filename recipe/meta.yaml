@@ -17,8 +17,6 @@ source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ commit_sha }}.tar.gz
     sha256: 02288f8f61692fe38049d65608ed832b31246e7792692376afb712fa4cef8775
     patches:
-      - fix_build.patch
-      - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
 
 build:
