@@ -14,4 +14,4 @@ os_version:
 test_on_native_only: true
 channels:
   targets:
-    - ["conda-forge", "dev"]
+  - [conda-forge, dev]
