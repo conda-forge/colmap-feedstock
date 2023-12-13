@@ -109,10 +109,10 @@ about:
   license: BSD-3-Clause
   license_file:
     - COPYING.txt
-    - lib/LSD/LICENSE
-    - lib/PBA/LICENSE  # [cuda_compiler_version != "12.0"]
-    - lib/PoissonRecon/LICENSE
-    - lib/SiftGPU/LICENSE
+    - src/thirdparty/LSD/LICENSE
+    - src/thirdparty/PoissonRecon/LICENSE
+    - src/thirdparty/SiftGPU/LICENSE
+    - src/thirdparty/VLFeat/LICENSE
   summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
 
 extra:
