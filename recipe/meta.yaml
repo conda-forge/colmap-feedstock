@@ -18,6 +18,7 @@ source:
     sha256: 1827e6059f1ca38756ee1e57a0a42fa9279f45af00af30df879a510d92e34952
     patches:
       - fix-find-lz4.patch  # [win]
+      - fix-boost-link.patch  # [win]
 
 build:
   number: {{ build }}
@@ -104,7 +105,7 @@ test:
     - if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler or "None") != "None"]
     - test -f $PREFIX/bin/colmap  # [unix]
     - test -f $PREFIX/lib/libcolmap_exe.a  # [unix]
-    - test -f $PREFIX/lib/libcolmap_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
+    - test -f $PREFIX/lib/libcolmap_util_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
     - test -f $PREFIX/share/colmap/colmap-config.cmake  # [unix]
 
 about:
