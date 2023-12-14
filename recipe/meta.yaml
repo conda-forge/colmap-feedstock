@@ -100,10 +100,11 @@ requirements:
 test:
   commands:
     - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)  # [win]
-    - if exist %PREFIX%\\Library\\lib\\colmap\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler or "None") != "None"]
+    - if exist %PREFIX%\\Library\\lib\\colmap_exe.lib (exit 0) else (exit 1)  # [win]
+    - if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler or "None") != "None"]
     - test -f $PREFIX/bin/colmap  # [unix]
-    - test -f $PREFIX/lib/colmap/libcolmap_exe.a  # [unix]
-    - test -f $PREFIX/lib/colmap/libcolmap_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
+    - test -f $PREFIX/lib/libcolmap_exe.a  # [unix]
+    - test -f $PREFIX/lib/libcolmap_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
     - test -f $PREFIX/share/colmap/colmap-config.cmake  # [unix]
 
 about:
