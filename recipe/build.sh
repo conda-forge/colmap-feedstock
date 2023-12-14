@@ -14,6 +14,8 @@ cmake ${CMAKE_ARGS} \
       -DCMAKE_BUILD_TYPE=Release \
       -DBOOST_STATIC=OFF \
       -DBUILD_SHARED_LIBS=OFF \
+      -DLZ4_INCLUDE_DIR_HINTS=$PREFIX/include \
+      -DLZ4_LIBRARY_DIR_HINTS=$PREFIX/lib \
       ${EXTRA_CMAKE_ARGS} \
 ..
 
