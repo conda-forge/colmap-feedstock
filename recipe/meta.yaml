@@ -16,6 +16,8 @@ package:
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ commit_sha }}.tar.gz
     sha256: 1827e6059f1ca38756ee1e57a0a42fa9279f45af00af30df879a510d92e34952
+    patches:
+      - fix-find-lz4.patch
 
 build:
   number: {{ build }}
