@@ -1,0 +1,12 @@
+diff --git a/src/colmap/exe/CMakeLists.txt b/src/colmap/exe/CMakeLists.txt
+index e07aa463f..bda7ec1d1 100644
+--- a/src/colmap/exe/CMakeLists.txt
++++ b/src/colmap/exe/CMakeLists.txt
+@@ -60,6 +60,7 @@ COLMAP_ADD_LIBRARY(
+         colmap_optim
+         colmap_scene
+         colmap_util
++        Boost::program_options
+ )
+ 
+ COLMAP_ADD_EXECUTABLE(
