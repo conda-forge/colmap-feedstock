@@ -1,0 +1,13 @@
+diff --git a/cmake/FindLZ4.cmake b/cmake/FindLZ4.cmake
+index 9f9d5232c..7d5cdb452 100644
+--- a/cmake/FindLZ4.cmake
++++ b/cmake/FindLZ4.cmake
+@@ -74,7 +74,7 @@ find_path(LZ4_INCLUDE_DIRS
+     ${LZ4_CHECK_INCLUDE_DIRS})
+ find_library(LZ4_LIBRARIES
+     NAMES
+-    lz4
++    lz4 liblz4
+     PATHS
+     ${LZ4_CHECK_LIBRARY_DIRS})
+ 
