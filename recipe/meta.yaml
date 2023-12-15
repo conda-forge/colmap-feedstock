@@ -1,7 +1,7 @@
 {% set name = "colmap" %}
 {% set version = "3.9.2023.12.14" %}
 {% set commit_sha = "8e7093d22b324ce71c70d368d852f0ad91743808" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
