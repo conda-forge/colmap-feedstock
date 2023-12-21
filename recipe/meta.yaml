@@ -1,7 +1,7 @@
 {% set name = "colmap" %}
 {% set version = "3.9.2023.12.14" %}
 {% set commit_sha = "8e7093d22b324ce71c70d368d852f0ad91743808" %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -84,6 +84,7 @@ requirements:
     - metis
     - libcurand-dev                  # [cuda_compiler_version == "12.0"]
     - cuda-cudart-dev                # [win and cuda_compiler_version == "12.0"]
+    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version == "12.0"]
   run:
     - vlfeat                         # [unix]
     - flann
