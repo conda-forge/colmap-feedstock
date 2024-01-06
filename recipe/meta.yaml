@@ -1,6 +1,7 @@
+{% set processor = "cpu" %}
 {% set name = "colmap" %}
-{% set version = "3.8" %}
-{% set build = 10 %}
+{% set version = "3.9" %}
+{% set build = 0 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -14,7 +15,7 @@ package:
 
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: 02288f8f61692fe38049d65608ed832b31246e7792692376afb712fa4cef8775
+    sha256: 68872fb90832e9c3454e6163676ced84901a30b2bd8fb69d36d4a50fa07c032c
     patches:
       - fix_build.patch
       - unvendor_vlfeat.patch  # [unix]
