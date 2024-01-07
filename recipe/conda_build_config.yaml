@@ -4,6 +4,3 @@ cxx_compiler_version:  # [osx]
   - 15                 # [osx]
 llvm_openmp:           # [osx]
   - 15                 # [osx]
-
-channel_targets:
-  - conda-forge colmap_dev
