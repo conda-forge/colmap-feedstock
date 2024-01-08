@@ -1,0 +1,51 @@
+From e30c28921640587238a5f4438af3b3a7ed90c4d1 Mon Sep 17 00:00:00 2001
+From: Tobias Fischer <info@tobiasfischer.info>
+Date: Tue, 9 Jan 2024 06:58:47 +1000
+Subject: [PATCH 1/2] Add missing "include <memory>" needed for unique_ptr
+
+Fix:
+/home/conda/feedstock_root/build_artifacts/colmap_1704738145804/work/src/colmap/image/line.cc: In function 'std::vector<colmap::LineSegment> colmap::DetectLineSegments(const colmap::Bitmap&, double)':
+/home/conda/feedstock_root/build_artifacts/colmap_1704738145804/work/src/colmap/image/line.cc:63:8: error: 'unique_ptr' is not a member of 'std'
+   63 |   std::unique_ptr<double, RawDeleter> segments_data(
+      |        ^~~~~~~~~~
+/home/conda/feedstock_root/build_artifacts/colmap_1704738145804/work/src/colmap/image/line.cc:36:1: note: 'std::unique_ptr' is defined in header '<memory>'; did you forget to '#include <memory>'?
+---
+ src/colmap/image/line.cc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/colmap/image/line.cc b/src/colmap/image/line.cc
+index 3637c3dcf..33fff7da0 100644
+--- a/src/colmap/image/line.cc
++++ b/src/colmap/image/line.cc
+@@ -27,6 +27,8 @@
+ // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ // POSSIBILITY OF SUCH DAMAGE.
+ 
++#include <memory>
++
+ #include "colmap/image/line.h"
+ 
+ #include "colmap/util/logging.h"
+
+From d221ae8a63de693a926335b918e037585bba016a Mon Sep 17 00:00:00 2001
+From: Tobias Fischer <info@tobiasfischer.info>
+Date: Tue, 9 Jan 2024 07:45:20 +1000
+Subject: [PATCH 2/2] Another missing include
+
+---
+ src/colmap/mvs/workspace.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/colmap/mvs/workspace.h b/src/colmap/mvs/workspace.h
+index 73d21b78c..6d2c862c5 100644
+--- a/src/colmap/mvs/workspace.h
++++ b/src/colmap/mvs/workspace.h
+@@ -29,6 +29,8 @@
+ 
+ #pragma once
+ 
++#include <memory>
++
+ #include "colmap/mvs/consistency_graph.h"
+ #include "colmap/mvs/depth_map.h"
+ #include "colmap/mvs/model.h"
