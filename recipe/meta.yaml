@@ -17,6 +17,7 @@ source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
     sha256: f947ad80802baa8f00f30f26d316d8c608ab2626465eac1c81cf325d57879862
     patches:
+      - 2338.patch
       - fix-find-lz4.patch  # [win]
 
 build:
