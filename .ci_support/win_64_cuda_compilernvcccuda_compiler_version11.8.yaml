@@ -27,7 +27,7 @@ libcblas:
 lz4_c:
 - 1.9.3
 metis:
-- 5.1.1
+- 5.1.0
 pin_run_as_build:
   flann:
     max_pin: x.x.x
