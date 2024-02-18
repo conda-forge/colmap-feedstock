@@ -1,7 +1,7 @@
 {% set processor = "cpu" %}
 {% set name = "colmap" %}
 {% set version = "3.9.1" %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
