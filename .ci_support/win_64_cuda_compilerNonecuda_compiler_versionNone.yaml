@@ -17,7 +17,7 @@ gflags:
 glew:
 - '2.1'
 glog:
-- '0.6'
+- '0.7'
 libblas:
 - 3.9 *netlib
 libboost_devel:
