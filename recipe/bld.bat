@@ -4,6 +4,7 @@ cd build
 set EXTRA_CMAKE_ARGS=""
 if NOT "%cuda_compiler_version%"=="None" (
     set EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all"
+    set NVCC_APPEND_FLAGS="%NVCC_APPEND_FLAGS% --use-local-env"
     set CUDA_ENABLED=ON
 ) else (
     set CUDA_ENABLED=OFF
