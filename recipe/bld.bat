@@ -6,6 +6,22 @@ if NOT "%cuda_compiler_version%"=="None" (
     set EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all"
     set NVCC_APPEND_FLAGS="%NVCC_APPEND_FLAGS% --use-local-env"
     set CUDA_ENABLED=ON
+    :: Remove some directories from PATH
+    set "PATH=%PATH:C:\\ProgramData\\Chocolatey\\bin;=%"
+    set "PATH=%PATH:C:\\Program Files (x86)\\sbt\\bin;=%"
+    set "PATH=%PATH:C:\\Rust\\.cargo\\bin;=%"
+    set "PATH=%PATH:C:\\Program Files\\Git\\usr\\bin;=%"
+    set "PATH=%PATH:C:\\Program Files\\Git\\cmd;=%"
+    set "PATH=%PATH:C:\\Program Files\\Git\\mingw64\\bin;=%"
+    set "PATH=%PATH:C:\\Program Files (x86)\\Subversion\\bin;=%"
+    set "PATH=%PATH:C:\\Program Files\\CMake\\bin;=%"
+    set "PATH=%PATH:C:\\Program Files\\OpenSSL\\bin;=%"
+    set "PATH=%PATH:C:\\Strawberry\\c\\bin;=%"
+    set "PATH=%PATH:C:\\Strawberry\\perl\\bin;=%"
+    set "PATH=%PATH:C:\\Strawberry\\perl\\site\\bin;=%"
+    set "PATH=%PATH:c:\\tools\\php;=%"
+    :: Make paths like C:\\hostedtoolcache\\windows\\Ruby\\2.5.7\\x64\\bin garbage
+    set "PATH=%PATH:ostedtoolcache=%"
 ) else (
     set CUDA_ENABLED=OFF
 )
