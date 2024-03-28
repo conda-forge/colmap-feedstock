@@ -4,7 +4,7 @@ cd build
 set EXTRA_CMAKE_ARGS=""
 if NOT "%cuda_compiler_version%"=="None" (
     set EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all"
-    set NVCC_APPEND_FLAGS="%NVCC_APPEND_FLAGS% --use-local-env"
+    :: set NVCC_APPEND_FLAGS="%NVCC_APPEND_FLAGS% --use-local-env"
     set CUDA_ENABLED=ON
     :: Remove some directories from PATH
     set "PATH=%PATH:C:\\ProgramData\\Chocolatey\\bin;=%"
@@ -34,7 +34,7 @@ cmake ^
     -DCUDA_ENABLED=%CUDA_ENABLED% ^
     -DCMAKE_CXX_FLAGS=-DNOMINMAX ^
     -DMETIS_DIR=%LIBRARY_PREFIX% ^
-    -DCMAKE_CUDA_FLAGS="--use-local-env" ^
+    -DCMAKE_CUDA_FLAGS=--use-local-env ^
     %EXTRA_CMAKE_ARGS% ^
     %SRC_DIR%
 if errorlevel 1 exit 1
