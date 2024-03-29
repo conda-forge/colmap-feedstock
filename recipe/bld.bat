@@ -17,6 +17,7 @@ cmake ^
     -DCUDA_ENABLED=%CUDA_ENABLED% ^
     -DCMAKE_CXX_FLAGS=-DNOMINMAX ^
     -DMETIS_DIR=%LIBRARY_PREFIX% ^
+    -DCMAKE_CUDA_FLAGS=--use-local-env ^
     %EXTRA_CMAKE_ARGS% ^
     %SRC_DIR%
 if errorlevel 1 exit 1
