@@ -11,4 +11,4 @@ github:
   tooling_branch_name: main
 os_version:
   linux_64: cos7
-test_on_native_only: true
+test: native_and_emulated
