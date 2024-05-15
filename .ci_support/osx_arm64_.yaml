@@ -56,7 +56,7 @@ qt_main:
 sqlite:
 - '3'
 suitesparse:
-- '5'
+- '7'
 target_platform:
 - osx-arm64
 vlfeat:
