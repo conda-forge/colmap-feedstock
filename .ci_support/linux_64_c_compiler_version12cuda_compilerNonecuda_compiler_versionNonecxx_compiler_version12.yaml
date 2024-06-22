@@ -39,7 +39,7 @@ libboost_devel:
 libcblas:
 - 3.9 *netlib
 libxcb:
-- '1.15'
+- '1.16'
 lz4_c:
 - 1.9.3
 metis:
