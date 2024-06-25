@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 c_compiler:
 - clang
 c_compiler_version:
@@ -37,7 +39,7 @@ libboost_devel:
 libcblas:
 - 3.9 *netlib
 libxcb:
-- '1.15'
+- '1.16'
 llvm_openmp:
 - '15'
 lz4_c:
