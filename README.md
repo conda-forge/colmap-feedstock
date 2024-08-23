@@ -3,19 +3,6 @@ About colmap-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/colmap-feedstock/blob/main/LICENSE.txt)
 
-
-About colmap
-------------
-
-Home: https://colmap.github.io/
-
-Package license: BSD-3-Clause
-
-Summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
-
-About colmap
-------------
-
 Home: https://colmap.github.io/
 
 Package license: BSD-3-Clause
