@@ -39,7 +39,7 @@ gmp:
 libblas:
 - 3.9 *netlib
 libboost_devel:
-- '1.84'
+- '1.86'
 libcblas:
 - 3.9 *netlib
 libxcb:
@@ -49,8 +49,6 @@ lz4_c:
 metis:
 - 5.1.0
 pin_run_as_build:
-  flann:
-    max_pin: x.x.x
   vlfeat:
     max_pin: x.x.x
 qt_main:
