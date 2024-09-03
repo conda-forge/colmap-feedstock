@@ -1,7 +1,7 @@
 {% set processor = "cpu" %}
 {% set name = "colmap" %}
 {% set version = "3.10" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -83,7 +83,7 @@ requirements:
     - lz4-c
     - metis
     - libcurand-dev                  # [cuda_compiler_version == "12.0"]
-    - cuda-cudart-dev                # [win and cuda_compiler_version == "12.0"]
+    - cuda-cudart-dev                # [cuda_compiler_version == "12.0"]
     - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version == "12.0"]
     - llvm-openmp                    # [osx]
     - libgomp                        # [linux]
