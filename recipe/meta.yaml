@@ -1,7 +1,7 @@
 {% set processor = "cpu" %}
 {% set name = "colmap" %}
-{% set version = "3.10" %}
-{% set build = 3 %}
+{% set version = "3.11.0" %}
+{% set build = 0 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -15,7 +15,7 @@ package:
 
 source:
   - url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: 61850f323e201ab6a1abbfb0e4a8b3ba1c4cedbf55e0a5716bdea1df8ae1813a
+    sha256: 8da471b0f5baa3bdd940f1778ffe338738eb47b90b4d03dcd8da6b9810014844
     patches:
       - 2338.patch
       - fix-find-lz4.patch  # [win]
