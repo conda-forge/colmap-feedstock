@@ -82,9 +82,9 @@ requirements:
     - gmp                            # [unix]
     - lz4-c
     - metis
-    - libcurand-dev                  # [cuda_compiler_version == "12.0"]
-    - cuda-cudart-dev                # [cuda_compiler_version == "12.0"]
-    - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version == "12.0"]
+    - libcurand-dev                  # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev                # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-version {{ cuda_compiler_version }}  # [(cuda_compiler_version or "None").startswith("12")]
     - llvm-openmp                    # [osx]
     - libgomp                        # [linux]
   run:
