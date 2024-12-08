@@ -39,11 +39,11 @@ libboost_devel:
 libcblas:
 - 3.9 *netlib
 libxcb:
-- '1.16'
+- '1'
 llvm_openmp:
 - '15'
 lz4_c:
-- 1.9.3
+- '1.10'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 metis:

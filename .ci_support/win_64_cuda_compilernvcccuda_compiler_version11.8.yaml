@@ -27,7 +27,7 @@ libboost_devel:
 libcblas:
 - 3.9 *netlib
 lz4_c:
-- 1.9.3
+- '1.10'
 metis:
 - 5.1.0
 qt_main:
