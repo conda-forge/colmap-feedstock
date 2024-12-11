@@ -1,6 +1,6 @@
 {% set name = "colmap" %}
 {% set version = "3.8" %}
-{% set build = 16 %}
+{% set build = 17 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -20,11 +20,11 @@ source:
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
       - fix-cuda-toolkit.patch
-      - 1809.patch  # [cuda_compiler_version == "12.0"]
-      - 1840.patch  # [cuda_compiler_version == "12.0"]
-      - 1823.patch  # [cuda_compiler_version == "12.0"]
-      - 1838.patch  # [cuda_compiler_version == "12.0"]
-      - 1841.patch  # [cuda_compiler_version == "12.0"]
+      - 1809.patch  # [(cuda_compiler_version or "None").startswith("12")]
+      - 1840.patch  # [(cuda_compiler_version or "None").startswith("12")]
+      - 1823.patch  # [(cuda_compiler_version or "None").startswith("12")]
+      - 1838.patch  # [(cuda_compiler_version or "None").startswith("12")]
+      - 1841.patch  # [(cuda_compiler_version or "None").startswith("12")]
 
 build:
   number: {{ build }}
@@ -87,8 +87,8 @@ requirements:
     - gmp                            # [unix]
     - lz4-c
     - metis
-    - libcurand-dev                  # [cuda_compiler_version == "12.0"]
-    - cuda-cudart-dev                # [win and cuda_compiler_version == "12.0"]
+    - libcurand-dev                  # [(cuda_compiler_version or "None").startswith("12")]
+    - cuda-cudart-dev                # [win and (cuda_compiler_version or "None").startswith("12")]
   run:
     - vlfeat                         # [unix]
     - flann
@@ -119,7 +119,7 @@ about:
   license_file:
     - COPYING.txt
     - lib/LSD/LICENSE
-    - lib/PBA/LICENSE  # [cuda_compiler_version != "12.0"]
+    - lib/PBA/LICENSE  # [not (cuda_compiler_version or "None").startswith("12")]
     - lib/PoissonRecon/LICENSE
     - lib/SiftGPU/LICENSE
   summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
