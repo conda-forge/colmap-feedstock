@@ -1,6 +1,6 @@
 {% set name = "colmap" %}
 {% set version = "3.8" %}
-{% set build = 17 %}
+{% set build = 18 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -84,7 +84,7 @@ requirements:
     - flann
     - sqlite
     - vlfeat                         # [unix]
-    - gmp                            # [unix]
+    - gmp
     - lz4-c
     - metis
     - libcurand-dev                  # [(cuda_compiler_version or "None").startswith("12")]
