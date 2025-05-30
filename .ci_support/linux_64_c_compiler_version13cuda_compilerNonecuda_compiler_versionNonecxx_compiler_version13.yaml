@@ -33,11 +33,11 @@ glog:
 gmp:
 - '6'
 libblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libboost_devel:
 - '1.86'
 libcblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libxcb:
 - '1'
 lz4_c:

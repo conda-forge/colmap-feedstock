@@ -21,11 +21,11 @@ glew:
 glog:
 - '0.7'
 libblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libboost_devel:
 - '1.86'
 libcblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 lz4_c:
 - '1.10'
 metis:
