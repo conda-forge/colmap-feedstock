@@ -1,7 +1,7 @@
 {% set processor = "cpu" %}
 {% set name = "colmap" %}
 {% set version = "3.11.1" %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 {% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
 {% set processor = "cpu" %}  # [osx]
@@ -23,7 +23,6 @@ source:
 build:
   number: {{ build }}
   string: {{ processor }}h{{ PKG_HASH }}_{{ build }}
-  skip: true  # [win and cuda_compiler_version == "11.2"]
   run_exports:
     - {{ pin_subpackage('colmap', max_pin='x.x') }}
 
@@ -32,7 +31,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
-    - {{ compiler('cuda') }}         # [(cuda_compiler or "None") != "None"]
+    - {{ compiler('cuda') }}         # [cuda_compiler_version != "None"]
     - cmake
     - make                           # [unix]
     - pkg-config
@@ -100,16 +99,16 @@ requirements:
     - xorg-libice                    # [unix]
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
-    - __cuda >={{ cuda_compiler_version }}  # [(cuda_compiler or "None") != "None"]
+    - __cuda >={{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
 
 test:
   commands:
     - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)  # [win]
     - if exist %PREFIX%\\Library\\lib\\colmap_exe.lib (exit 0) else (exit 1)  # [win]
-    - if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler or "None") != "None"]
+    - if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and cuda_compiler_version != "None"]
     - test -f $PREFIX/bin/colmap  # [unix]
     - test -f $PREFIX/lib/libcolmap_exe.a  # [unix]
-    - test -f $PREFIX/lib/libcolmap_util_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
+    - test -f $PREFIX/lib/libcolmap_util_cuda.a  # [unix and cuda_compiler_version != "None"]
     - test -f $PREFIX/share/colmap/colmap-config.cmake  # [unix]
 
 about:
