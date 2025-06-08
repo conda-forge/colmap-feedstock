@@ -37,7 +37,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
     - {{ compiler('cuda') }}         # [(cuda_compiler_version or "None") != "None"]
-    - cmake
+    - cmake <4
     - make                           # [unix]
     - pkg-config
     - ninja
