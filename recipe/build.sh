@@ -15,6 +15,7 @@ fi
 cmake ${CMAKE_ARGS} \
       -DCMAKE_BUILD_TYPE=Release \
       -DBOOST_STATIC=OFF \
+      -DOPENGL_ENABLED=ON \
       -DBUILD_SHARED_LIBS=OFF \
       ${EXTRA_CMAKE_ARGS} \
 ..
