@@ -1,10 +1,9 @@
 {% set processor = "cpu" %}
 {% set name = "colmap" %}
 {% set version = "3.11.1" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
-{% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
-{% set processor = "cpu" %}  # [osx]
+{% set processor = "cpu" if (cuda_compiler_version or "None") == "None" else "gpu" %}
 
 # Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
 {% set build = build + 100 if processor == "gpu" else build %}
@@ -38,17 +37,6 @@ requirements:
     - ninja
     - llvm-openmp                    # [osx]
     - libgomp                        # [linux]
-    # x11 stuff
-    - {{ cdt('mesa-libgl-devel') }}  # [unix and not arm64]
-    - {{ cdt('mesa-dri-drivers') }}  # [unix and not arm64]
-    - {{ cdt('libselinux') }}        # [linux]
-    - {{ cdt('libxcb') }}            # [linux]
-    - {{ cdt('libxdamage') }}        # [linux]
-    - {{ cdt('libxfixes') }}         # [linux]
-    - {{ cdt('libxxf86vm') }}        # [linux]
-    - {{ cdt('libxext') }}           # [linux]
-    - {{ cdt('libxau') }}            # [linux]
-    - {{ cdt('expat-devel') }}       # [linux]
   host:
     # x11 stuff
     - xorg-libxext                   # [unix]
@@ -61,6 +49,8 @@ requirements:
     - xorg-libice                    # [unix]
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
+    - libgl-devel                    # [linux]
+    - libopengl-devel                # [linux]    
     # deps
     - libblas
     - libcblas
