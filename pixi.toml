@@ -25,198 +25,54 @@ description = "List contents of all packages found in rattler-build build direct
 [tasks.build]
 cmd = "rattler-build build --recipe recipe"
 description = "Build colmap-feedstock directly (without setup scripts), no particular variant specified"
-[tasks."build-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython"
-[tasks."build-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.10.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.11.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.12.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13python3.9.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.10.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.11.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.12.____cpython"
-[tasks."build-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13python3.9.____cpython"
-[tasks."build-osx_64_python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_64_python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_64_python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_64_python3.10.____cpython"
-[tasks."build-osx_64_python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_64_python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_64_python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_64_python3.11.____cpython"
-[tasks."build-osx_64_python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_64_python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_64_python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_64_python3.12.____cpython"
-[tasks."build-osx_64_python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_64_python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_64_python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_64_python3.9.____cpython"
-[tasks."build-osx_arm64_python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_arm64_python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_arm64_python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_arm64_python3.10.____cpython"
-[tasks."build-osx_arm64_python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_arm64_python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_arm64_python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_arm64_python3.11.____cpython"
-[tasks."build-osx_arm64_python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_arm64_python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_arm64_python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_arm64_python3.12.____cpython"
-[tasks."build-osx_arm64_python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant osx_arm64_python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-osx_arm64_python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant osx_arm64_python3.9.____cpython"
-[tasks."build-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.10.____cpython"
-[tasks."build-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.11.____cpython"
-[tasks."build-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.12.____cpython"
-[tasks."build-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6python3.9.____cpython"
-[tasks."build-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.10.____cpython"
-[tasks."build-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.11.____cpython"
-[tasks."build-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.12.____cpython"
-[tasks."build-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython.yaml"
-description = "Build colmap-feedstock with variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython directly (without setup scripts)"
-[tasks."inspect-win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython.yaml"
-description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilerNonecuda_compiler_versionNonepython3.9.____cpython"
+[tasks."build-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13 directly (without setup scripts)"
+[tasks."inspect-linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13"
+[tasks."build-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13.yaml"
+description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13 directly (without setup scripts)"
+[tasks."inspect-linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13"
+[tasks."build-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilercuda-nvcccuda_compiler_version12.6cxx_compiler_version13"
+[tasks."build-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13.yaml"
+description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compilerNonecuda_compiler_versionNonecxx_compiler_version13"
+[tasks."build-osx_64_"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_.yaml"
+description = "Build colmap-feedstock with variant osx_64_ directly (without setup scripts)"
+[tasks."inspect-osx_64_"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_.yaml"
+description = "List contents of colmap-feedstock packages built for variant osx_64_"
+[tasks."build-osx_arm64_"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_.yaml"
+description = "Build colmap-feedstock with variant osx_arm64_ directly (without setup scripts)"
+[tasks."inspect-osx_arm64_"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_.yaml"
+description = "List contents of colmap-feedstock packages built for variant osx_arm64_"
+[tasks."build-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6.yaml"
+description = "Build colmap-feedstock with variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6 directly (without setup scripts)"
+[tasks."inspect-win_64_cuda_compilercuda-nvcccuda_compiler_version12.6"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilercuda-nvcccuda_compiler_version12.6.yaml"
+description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilercuda-nvcccuda_compiler_version12.6"
+[tasks."build-win_64_cuda_compilerNonecuda_compiler_versionNone"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNone.yaml"
+description = "Build colmap-feedstock with variant win_64_cuda_compilerNonecuda_compiler_versionNone directly (without setup scripts)"
+[tasks."inspect-win_64_cuda_compilerNonecuda_compiler_versionNone"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cuda_compilerNonecuda_compiler_versionNone.yaml"
+description = "List contents of colmap-feedstock packages built for variant win_64_cuda_compilerNonecuda_compiler_versionNone"
 
 [feature.smithy.dependencies]
 conda-smithy = "*"

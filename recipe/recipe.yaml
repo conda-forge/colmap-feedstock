@@ -26,7 +26,7 @@ source:
 build:
   number: ${{ build }}
   skip: cuda_compiler_version == "11.8"
-  string: ${{ string_prefix }}py${{ python | version_to_buildstring }}h${{ hash }}_${{ build_number }}
+  string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
   variant:
     use_keys:
       # use cuda from the variant config, e.g. to build multiple CUDA variants
