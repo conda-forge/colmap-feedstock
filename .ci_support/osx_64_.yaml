@@ -14,8 +14,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler:
-- None
 cuda_compiler_version:
 - None
 cxx_compiler:
@@ -33,11 +31,11 @@ glog:
 gmp:
 - '6'
 libblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libboost_devel:
 - '1.86'
 libcblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libxcb:
 - '1'
 llvm_openmp:

@@ -1,9 +1,8 @@
 {% set name = "colmap" %}
 {% set version = "3.8" %}
-{% set build = 18 %}
+{% set build = 19 %}
 
-{% set processor = "cpu" if cuda_compiler_version == "None" else "gpu" %}  # [not osx]
-{% set processor = "cpu" %}  # [osx]
+{% set processor = "cpu" if (cuda_compiler_version or "None") == "None" else "gpu" %}
 
 # Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
 {% set build = build + 100 if processor == "gpu" else build %}
@@ -37,24 +36,13 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - {{ compiler('cuda') }}         # [(cuda_compiler or "None") != "None"]
-    - cmake
+    - {{ compiler('cuda') }}         # [(cuda_compiler_version or "None") != "None"]
+    - cmake <4
     - make                           # [unix]
     - pkg-config
     - ninja
     - llvm-openmp                    # [osx]
     - libgomp                        # [linux]
-    # x11 stuff
-    - {{ cdt('mesa-libgl-devel') }}  # [unix and not arm64]
-    - {{ cdt('mesa-dri-drivers') }}  # [unix and not arm64]
-    - {{ cdt('libselinux') }}        # [linux]
-    - {{ cdt('libxcb') }}            # [linux]
-    - {{ cdt('libxdamage') }}        # [linux]
-    - {{ cdt('libxfixes') }}         # [linux]
-    - {{ cdt('libxxf86vm') }}        # [linux]
-    - {{ cdt('libxext') }}           # [linux]
-    - {{ cdt('libxau') }}            # [linux]
-    - {{ cdt('expat-devel') }}       # [linux]
   host:
     # x11 stuff
     - xorg-libxext                   # [unix]
@@ -67,6 +55,8 @@ requirements:
     - xorg-libice                    # [unix]
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
+    - libgl-devel                    # [linux]
+    - libopengl-devel                # [linux]
     # deps
     - libblas
     - libcblas
@@ -102,15 +92,15 @@ requirements:
     - xorg-libice                    # [unix]
     - xorg-libsm                     # [unix]
     - libglu                         # [linux]
-    - __cuda >={{ cuda_compiler_version }}  # [(cuda_compiler or "None") != "None"]
+    - __cuda >={{ cuda_compiler_version }}  # [(cuda_compiler_version or "None") != "None"]
 
 test:
   commands:
     - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)  # [win]
-    - if exist %PREFIX%\\Library\\lib\\colmap\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler or "None") != "None"]
+    - if exist %PREFIX%\\Library\\lib\\colmap\\colmap_cuda.lib (exit 0) else (exit 1)  # [win and (cuda_compiler_version or "None") != "None"]
     - test -f $PREFIX/bin/colmap  # [unix]
     - test -f $PREFIX/lib/colmap/libcolmap.a  # [unix]
-    - test -f $PREFIX/lib/colmap/libcolmap_cuda.a  # [unix and (cuda_compiler or "None") != "None"]
+    - test -f $PREFIX/lib/colmap/libcolmap_cuda.a  # [unix and (cuda_compiler_version or "None") != "None"]
     - test -f $PREFIX/share/colmap/COLMAPConfig.cmake  # [unix]
 
 about:
