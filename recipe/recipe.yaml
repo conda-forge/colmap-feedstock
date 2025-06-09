@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: 3.11.1
-  build_number: 104
+  build_number: 105
 
   cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
   cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
@@ -83,6 +83,8 @@ requirements:
     - glew
     - cgal-cpp
     - ceres-solver
+    - if: cuda == "enabled"
+      then: ceres-solver * [build="gpu"*]
     - qt-main
     - git
     - flann
