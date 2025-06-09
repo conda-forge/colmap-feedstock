@@ -13,9 +13,9 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- None
+- cuda-nvcc
 cuda_compiler_version:
-- None
+- '12.6'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -45,8 +45,13 @@ lz4_c:
 metis:
 - 5.1.0
 pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
   vlfeat:
     max_pin: x.x.x
+python:
+- 3.11.* *_cpython
 qt_main:
 - '5.15'
 sqlite:
@@ -54,7 +59,7 @@ sqlite:
 suitesparse:
 - '7'
 target_platform:
-- linux-64
+- linux-aarch64
 vlfeat:
 - 0.9.21
 zip_keys:

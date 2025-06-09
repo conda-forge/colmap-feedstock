@@ -1,27 +1,27 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 c_compiler:
-- gcc
+- clang
 c_compiler_version:
-- '11'
+- '18'
 c_stdlib:
-- sysroot
+- macosx_deployment_target
 c_stdlib_version:
-- '2.17'
-cdt_name:
-- conda
+- '11.0'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- nvcc
+- None
 cuda_compiler_version:
-- '11.8'
+- None
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '11'
-docker_image:
-- quay.io/condaforge/linux-anvil-x86_64-cuda11.8:ubi8
+- '18'
 flann:
 - 1.9.2
 gflags:
@@ -40,13 +40,22 @@ libcblas:
 - 3.9.* *netlib
 libxcb:
 - '1'
+llvm_openmp:
+- '18'
 lz4_c:
 - '1.10'
+macos_machine:
+- arm64-apple-darwin20.0.0
 metis:
 - 5.1.0
 pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
   vlfeat:
     max_pin: x.x.x
+python:
+- 3.12.* *_cpython
 qt_main:
 - '5.15'
 sqlite:
@@ -54,12 +63,9 @@ sqlite:
 suitesparse:
 - '7'
 target_platform:
-- linux-aarch64
+- osx-arm64
 vlfeat:
 - 0.9.21
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-  - cuda_compiler
-  - cuda_compiler_version
-  - docker_image

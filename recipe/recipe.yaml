@@ -68,6 +68,7 @@ requirements:
         - xorg-libice
         - xorg-libsm
     - if: linux
+      then:
         - libglu
         - libgl-devel
         - libopengl-devel
