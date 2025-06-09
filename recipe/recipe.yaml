@@ -1,0 +1,153 @@
+# Prioritize gpu build if cudatoolkit can be installed (through __cuda virtual package)
+schema_version: 1
+
+context:
+  name: colmap
+  version: 3.11.1
+  build_number: 104
+
+  cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
+  cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
+  cuda_build_string: cuda_${{ cuda_version | version_to_buildstring }}
+  string_prefix: ${{ cuda_build_string if cuda ==  "enabled" else "cpu_" }}
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
+    sha256: d2c20729ab5b1198e17725b720128f304f4cfae5c0a8c20d75c0e9c5bdee5860
+    patches:
+      - 2338.patch
+      - if: win
+        then: fix-find-lz4.patch
+
+build:
+  number: ${{ build }}
+  skip: cuda_compiler_version == "11.8"
+  string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
+  variant:
+    use_keys:
+      # use cuda from the variant config, e.g. to build multiple CUDA variants
+      - ${{ "cuda" if cuda == "enabled" }}
+    # this will down-prioritize the cpu variant versus other variants of the package
+    down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
+  script:
+    file: build
+    env:
+      cuda_compiler_version: ${{ cuda_version | default('None') }}
+      package_version: ${{ version }}
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - if: cuda == "enabled"
+      then: ${{ compiler('cuda') }}
+    - cmake
+    - if: unix
+      then: make
+    - pkg-config
+    - ninja
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+  host:
+    - if: unix
+      then:
+        - xorg-libxext
+        - xorg-libxdmcp
+        - xorg-libxau
+        - libxcb
+        - xorg-libxfixes
+        - xorg-libxrender
+        - xorg-libx11
+        - xorg-libice
+        - xorg-libsm
+    - if: linux
+      then:
+        - libglu
+        - libgl-devel
+        - libopengl-devel
+    - libblas
+    - libcblas
+    - libboost-devel
+    - suitesparse
+    - eigen
+    - freeimage
+    - glog
+    - gflags
+    - glew
+    - cgal-cpp
+    - ceres-solver
+    - qt-main
+    - git
+    - flann
+    - sqlite
+    - if: unix
+      then:
+        - vlfeat
+        - gmp
+    - lz4-c
+    - metis
+    - if: cuda == "enabled"
+      then:
+        - libcurand-dev
+        - cuda-cudart-dev
+        - cuda-version ==${{ cuda_version }}
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+  run:
+    - flann
+    - if: unix
+      then:
+        - xorg-libxext
+        - xorg-libxdmcp
+        - xorg-libxau
+        - libxcb
+        - xorg-libxfixes
+        - xorg-libxrender
+        - xorg-libx11
+        - xorg-libice
+        - xorg-libsm
+        - vlfeat
+    - if: linux
+      then: libglu
+  run_exports:
+    - ${{ pin_subpackage('colmap', upper_bound='x.x') }}
+
+tests:
+  - script:
+      - if: win
+        then: 
+          - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)
+          - if exist %PREFIX%\\Library\\lib\\colmap_exe.lib (exit 0) else (exit 1)
+      - if: win and cuda == "enabled"
+        then: if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)
+      - if: unix
+        then: 
+          - test -f $PREFIX/bin/colmap
+          - test -f $PREFIX/lib/libcolmap_exe.a
+          - test -f $PREFIX/share/colmap/colmap-config.cmake
+      - if: unix and cuda == "enabled"
+        then: test -f $PREFIX/lib/libcolmap_util_cuda.a
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - COPYING.txt
+    - src/thirdparty/LSD/LICENSE
+    - src/thirdparty/PoissonRecon/LICENSE
+    - src/thirdparty/SiftGPU/LICENSE
+    - src/thirdparty/VLFeat/LICENSE
+  summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
+  homepage: https://colmap.github.io/
+
+extra:
+  recipe-maintainers:
+    - Tobias-Fischer
