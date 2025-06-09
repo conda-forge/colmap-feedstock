@@ -31,8 +31,8 @@ build:
     use_keys:
       # use cuda from the variant config, e.g. to build multiple CUDA variants
       - ${{ "cuda" if cuda == "enabled" }}
-    # this will down-prioritize the cuda variant versus other variants of the package
-    down_prioritize_variant: ${{ 1 if cuda == "enabled" else 0 }}
+    # this will down-prioritize the cpu variant versus other variants of the package
+    down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
   script:
     file: build
     env:
