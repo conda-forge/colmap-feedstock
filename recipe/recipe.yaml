@@ -84,7 +84,7 @@ requirements:
     - cgal-cpp
     - ceres-solver
     - if: cuda == "enabled"
-      then: ceres-solver * [build="gpu"*]
+      then: ceres-solver * [build="gpu*"]
     - qt-main
     - git
     - flann
