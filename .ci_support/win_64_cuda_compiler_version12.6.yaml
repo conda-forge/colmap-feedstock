@@ -1,5 +1,5 @@
 c_compiler:
-- vs2019
+- vs2022
 c_stdlib:
 - vs
 channel_sources:
@@ -11,7 +11,7 @@ cuda_compiler:
 cuda_compiler_version:
 - '12.6'
 cxx_compiler:
-- vs2019
+- vs2022
 flann:
 - 1.9.2
 gflags:
@@ -38,6 +38,3 @@ suitesparse:
 - '7'
 target_platform:
 - win-64
-zip_keys:
-- - cuda_compiler
-  - cuda_compiler_version
