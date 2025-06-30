@@ -19,7 +19,6 @@ source:
   - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
     sha256: 98aae3fbed984940a9d6f7ea93ca063c3f4eee3b4f6fff3bf6bdbf003efecfcb
     patches:
-      - 2338.patch
       - if: win
         then: fix-find-lz4.patch
 
