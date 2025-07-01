@@ -3,8 +3,8 @@ schema_version: 1
 
 context:
   name: colmap
-  version: 3.11.1
-  build_number: 105
+  version: "3.12.0"
+  build_number: 0
 
   cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
   cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
@@ -17,11 +17,7 @@ package:
 
 source:
   - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
-    sha256: d2c20729ab5b1198e17725b720128f304f4cfae5c0a8c20d75c0e9c5bdee5860
-    patches:
-      - 2338.patch
-      - if: win
-        then: fix-find-lz4.patch
+    sha256: 98aae3fbed984940a9d6f7ea93ca063c3f4eee3b4f6fff3bf6bdbf003efecfcb
 
 build:
   number: ${{ build }}
@@ -126,18 +122,18 @@ requirements:
 tests:
   - script:
       - if: win
-        then: 
+        then:
           - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)
           - if exist %PREFIX%\\Library\\lib\\colmap_exe.lib (exit 0) else (exit 1)
-      - if: win and cuda == "enabled"
-        then: if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)
+          - if: cuda == "enabled"
+            then: if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)
       - if: unix
-        then: 
+        then:
           - test -f $PREFIX/bin/colmap
           - test -f $PREFIX/lib/libcolmap_exe.a
           - test -f $PREFIX/share/colmap/colmap-config.cmake
-      - if: unix and cuda == "enabled"
-        then: test -f $PREFIX/lib/libcolmap_util_cuda.a
+          - if: cuda == "enabled"
+            then: test -f $PREFIX/lib/libcolmap_util_cuda.a
 
 about:
   license: BSD-3-Clause
