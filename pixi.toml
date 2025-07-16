@@ -7,7 +7,7 @@
 
 [project]
 name = "colmap-feedstock"
-version = "3.50.1"  # conda-smithy version used to generate this file
+version = "3.51.1"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/colmap-feedstock"
 authors = ["@conda-forge/colmap"]
 channels = ["conda-forge"]
@@ -25,30 +25,30 @@ description = "List contents of all packages found in rattler-build build direct
 [tasks.build]
 cmd = "rattler-build build --recipe recipe"
 description = "Build colmap-feedstock directly (without setup scripts), no particular variant specified"
-[tasks."build-linux_64_cuda_compiler_version12.6"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_cuda_compiler_version12.6.yaml"
-description = "Build colmap-feedstock with variant linux_64_cuda_compiler_version12.6 directly (without setup scripts)"
-[tasks."inspect-linux_64_cuda_compiler_version12.6"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_cuda_compiler_version12.6.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_cuda_compiler_version12.6"
-[tasks."build-linux_64_cuda_compiler_versionNone"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_cuda_compiler_versionNone.yaml"
-description = "Build colmap-feedstock with variant linux_64_cuda_compiler_versionNone directly (without setup scripts)"
-[tasks."inspect-linux_64_cuda_compiler_versionNone"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_cuda_compiler_versionNone.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_64_cuda_compiler_versionNone"
-[tasks."build-linux_aarch64_cuda_compiler_version12.6"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cuda_compiler_version12.6.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_cuda_compiler_version12.6 directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_cuda_compiler_version12.6"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cuda_compiler_version12.6.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_cuda_compiler_version12.6"
-[tasks."build-linux_aarch64_cuda_compiler_versionNone"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cuda_compiler_versionNone.yaml"
-description = "Build colmap-feedstock with variant linux_aarch64_cuda_compiler_versionNone directly (without setup scripts)"
-[tasks."inspect-linux_aarch64_cuda_compiler_versionNone"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cuda_compiler_versionNone.yaml"
-description = "List contents of colmap-feedstock packages built for variant linux_aarch64_cuda_compiler_versionNone"
+[tasks."build-linux_64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "Build colmap-feedstock with variant linux_64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13 directly (without setup scripts)"
+[tasks."inspect-linux_64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13"
+[tasks."build-linux_64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14.yaml"
+description = "Build colmap-feedstock with variant linux_64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14 directly (without setup scripts)"
+[tasks."inspect-linux_64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14"
+[tasks."build-linux_aarch64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version13cuda_compiler_version12.6cxx_compiler_version13"
+[tasks."build-linux_aarch64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14.yaml"
+description = "Build colmap-feedstock with variant linux_aarch64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14 directly (without setup scripts)"
+[tasks."inspect-linux_aarch64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14.yaml"
+description = "List contents of colmap-feedstock packages built for variant linux_aarch64_c_compiler_version14cuda_compiler_versionNonecxx_compiler_version14"
 [tasks."build-osx_64_"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_.yaml"
 description = "Build colmap-feedstock with variant osx_64_ directly (without setup scripts)"
