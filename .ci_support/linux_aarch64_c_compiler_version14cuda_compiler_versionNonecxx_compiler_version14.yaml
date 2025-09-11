@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '11'
+- '14'
 c_stdlib:
 - sysroot
 c_stdlib_version:
@@ -13,15 +13,15 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- nvcc
+- cuda-nvcc
 cuda_compiler_version:
-- '11.8'
+- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '11'
+- '14'
 docker_image:
-- quay.io/condaforge/linux-anvil-x86_64-cuda11.8:ubi8
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 flann:
 - 1.9.2
 gflags:
@@ -35,7 +35,7 @@ gmp:
 libblas:
 - 3.9.* *netlib
 libboost_devel:
-- '1.86'
+- '1.88'
 libcblas:
 - 3.9.* *netlib
 libxcb:
@@ -60,6 +60,5 @@ vlfeat:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-  - cuda_compiler
+  - c_stdlib_version
   - cuda_compiler_version
-  - docker_image
