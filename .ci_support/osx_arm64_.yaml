@@ -33,13 +33,13 @@ gmp:
 libblas:
 - 3.9.* *netlib
 libboost_devel:
-- '1.86'
+- '1.88'
 libcblas:
 - 3.9.* *netlib
 libxcb:
 - '1'
 llvm_openmp:
-- '18'
+- '19'
 lz4_c:
 - '1.10'
 macos_machine:
