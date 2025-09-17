@@ -3,8 +3,8 @@ schema_version: 1
 
 context:
   name: colmap
-  version: "3.12.5"
-  build_number: 1
+  version: "3.12.6"
+  build_number: 0
 
   cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
   cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
@@ -17,7 +17,7 @@ package:
 
 source:
   - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
-    sha256: 93dfb220cce24d988506bbb1d27d4278eacfd4e372df61d380559d414c1bd9e4
+    sha256: f66d34be7a738fa753d1b71aec4fb7411d8c117beb58d1f2ba84ee2696c96410
 
 build:
   number: ${{ build }}
