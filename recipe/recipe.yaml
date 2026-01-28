@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "3.13.0"
-  build_number: 1
+  build_number: 2
 
   cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
   cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
@@ -28,7 +28,7 @@ build:
       # use cuda from the variant config, e.g. to build multiple CUDA variants
       - ${{ "cuda" if cuda == "enabled" }}
     # this will down-prioritize the cpu variant versus other variants of the package
-    down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
+    down_prioritize_variant: ${{ 1 if cuda == "enabled" else 0 }}
   script:
     file: build
     env:
