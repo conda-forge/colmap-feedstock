@@ -28,7 +28,7 @@ build:
       # use cuda from the variant config, e.g. to build multiple CUDA variants
       - ${{ "cuda" if cuda == "enabled" }}
     # this will down-prioritize the cpu variant versus other variants of the package
-    down_prioritize_variant: ${{ 1 if cuda == "enabled" else 0 }}
+    down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
   script:
     file: build
     env:
@@ -102,6 +102,9 @@ requirements:
       then: libgomp
   run:
     - flann
+    - if: cuda == "enabled"
+      then:
+        - __cuda # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
     - if: unix
       then:
         - xorg-libxext
