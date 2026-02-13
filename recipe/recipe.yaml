@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "3.13.0"
-  build_number: 1
+  build_number: 2
 
   cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
   cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
@@ -102,6 +102,9 @@ requirements:
       then: libgomp
   run:
     - flann
+    - if: cuda == "enabled"
+      then:
+        - __cuda # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
     - if: unix
       then:
         - xorg-libxext
