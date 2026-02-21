@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "3.13.0"
-  build_number: 3
+  build_number: 4
 
   cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
   cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
