@@ -21,7 +21,6 @@ source:
 
 build:
   number: ${{ build_number }}
-  skip: cuda_compiler_version == "11.8"
   string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
   variant:
     use_keys:
@@ -102,6 +101,8 @@ requirements:
       then: llvm-openmp
     - if: linux
       then: libgomp
+    if: not osx and x86_64
+    then: onnxruntime
   run:
     - flann
     - if: cuda == "enabled"
