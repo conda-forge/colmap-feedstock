@@ -92,6 +92,7 @@ requirements:
         - gmp
     - lz4-c
     - metis
+    - openimageio
     - if: cuda == "enabled"
       then:
         - libcurand-dev
