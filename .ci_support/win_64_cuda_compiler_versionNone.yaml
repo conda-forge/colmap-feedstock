@@ -6,12 +6,12 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler:
-- cuda-nvcc
 cuda_compiler_version:
 - None
 cxx_compiler:
 - vs2022
+eigen_abi_devel:
+- 3.4.0
 flann:
 - 1.9.2
 gflags:
