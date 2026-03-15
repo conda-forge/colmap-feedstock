@@ -102,7 +102,9 @@ requirements:
     - if: linux
       then: libgomp
     - if: not (osx and x86_64)
-      then: onnxruntime
+      then:
+        - onnxruntime
+        - onnxruntime-cpp
   run:
     - flann
     - if: cuda == "enabled"
