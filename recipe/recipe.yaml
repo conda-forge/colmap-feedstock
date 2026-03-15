@@ -101,8 +101,8 @@ requirements:
       then: llvm-openmp
     - if: linux
       then: libgomp
-    if: not osx and x86_64
-    then: onnxruntime
+    - if: not osx and x86_64
+      then: onnxruntime
   run:
     - flann
     - if: cuda == "enabled"
