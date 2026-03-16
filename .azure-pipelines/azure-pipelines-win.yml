@@ -8,8 +8,11 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_:
-        CONFIG: win_64_
+      win_64_cuda_compiler_version12.9:
+        CONFIG: win_64_cuda_compiler_version12.9
+        UPLOAD_PACKAGES: 'True'
+      win_64_cuda_compiler_versionNone:
+        CONFIG: win_64_cuda_compiler_versionNone
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:

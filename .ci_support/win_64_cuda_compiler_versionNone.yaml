@@ -1,21 +1,17 @@
 c_compiler:
-- gcc
-c_compiler_version:
-- '14'
+- vs2022
 c_stdlib:
-- sysroot
-c_stdlib_version:
-- '2.17'
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- cuda-nvcc
+cuda_compiler_version:
+- None
 cxx_compiler:
-- gxx
-cxx_compiler_version:
-- '14'
-docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- vs2022
 eigen_abi_devel:
 - 3.4.0
 flann:
@@ -26,23 +22,16 @@ glew:
 - '2.3'
 glog:
 - '0.7'
-gmp:
-- '6'
 libblas:
 - 3.9.* *netlib
 libboost_devel:
 - '1.88'
 libcblas:
 - 3.9.* *netlib
-libxcb:
-- '1'
 lz4_c:
 - '1.10'
 metis:
 - 5.1.0
-pin_run_as_build:
-  vlfeat:
-    max_pin: x.x.x
 qt_main:
 - '5.15'
 sqlite:
@@ -50,10 +39,4 @@ sqlite:
 suitesparse:
 - '7'
 target_platform:
-- linux-64
-vlfeat:
-- 0.9.21
-zip_keys:
-- - c_compiler_version
-  - cxx_compiler_version
-  - c_stdlib_version
+- win-64

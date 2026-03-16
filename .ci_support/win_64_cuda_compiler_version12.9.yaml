@@ -6,6 +6,10 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- cuda-nvcc
+cuda_compiler_version:
+- '12.9'
 cxx_compiler:
 - vs2022
 eigen_abi_devel:
