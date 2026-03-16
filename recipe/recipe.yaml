@@ -3,12 +3,11 @@ schema_version: 1
 
 context:
   name: colmap
-  version: "3.13.0"
-  build_number: 4
+  version: "4.0.1"
+  build_number: 0
 
-  cuda_version: ${{ env.get("CONDA_OVERRIDE_CUDA", default="None") }}
-  cuda: ${{ "enabled" if cuda_version != "None" else "disabled" }}
-  cuda_build_string: cuda_${{ cuda_version | version_to_buildstring }}
+  cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
+  cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
   string_prefix: ${{ cuda_build_string if cuda ==  "enabled" else "cpu_" }}
 
 package:
@@ -17,11 +16,12 @@ package:
 
 source:
   - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
-    sha256: 98a8f8cf6358774be223239a9b034cc9d55bf66c43f54fc6ddea9128a1ee197a
+    sha256: de391aad3e45bbb1c43753a3b6dea50c6cf486316c7aa6c2356376822497ac60
+    patches:
+      - fix-onnx-include-path.patch
 
 build:
   number: ${{ build_number }}
-  skip: cuda_compiler_version == "11.8"
   string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
   variant:
     use_keys:
@@ -32,7 +32,6 @@ build:
   script:
     file: build
     env:
-      cuda_compiler_version: ${{ cuda_version | default('None') }}
       package_version: ${{ version }}
 
 requirements:
@@ -92,20 +91,25 @@ requirements:
         - gmp
     - lz4-c
     - metis
+    - openimageio
     - if: cuda == "enabled"
       then:
         - libcurand-dev
         - cuda-cudart-dev
-        - cuda-version ==${{ cuda_version }}
+        - cuda-version ==${{ cuda_compiler_version }}
     - if: osx
       then: llvm-openmp
     - if: linux
       then: libgomp
+    - if: not (osx and x86_64)
+      then:
+        - onnxruntime
+        - onnxruntime-cpp
   run:
     - flann
     - if: cuda == "enabled"
       then:
-        - __cuda # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
+        - __cuda >=${{ cuda_compiler_version }}  # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
     - if: unix
       then:
         - xorg-libxext
