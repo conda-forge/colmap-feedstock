@@ -10,8 +10,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler_version:
-- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -52,11 +50,10 @@ sqlite:
 suitesparse:
 - '7'
 target_platform:
-- linux-64
+- linux-aarch64
 vlfeat:
 - 0.9.21
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - c_stdlib_version
-  - cuda_compiler_version
