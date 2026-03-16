@@ -109,7 +109,7 @@ requirements:
     - flann
     - if: cuda == "enabled"
       then:
-        - __cuda # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
+        - __cuda >=${{ cuda_compiler_version }}  # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
     - if: unix
       then:
         - xorg-libxext
