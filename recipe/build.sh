@@ -23,6 +23,9 @@ cmake ${CMAKE_ARGS} \
       -DBOOST_STATIC=OFF \
       -DOPENGL_ENABLED=ON \
       -DBUILD_SHARED_LIBS=OFF \
+      -DFETCH_FAISS=OFF \
+      -DFETCH_POSELIB=OFF \
+      -DFETCH_ONNX=OFF \
       ${EXTRA_CMAKE_ARGS} \
 ..
 

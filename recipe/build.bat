@@ -1,6 +1,13 @@
 mkdir build
 cd build
 
+:: Workaround for wrong faiss_gpu reference
+set "FAISS_CMAKE=%LIBRARY_PREFIX%\lib\cmake\faiss\faiss-targets.cmake"
+
+sed -i "s|INTERFACE_LINK_LIBRARIES \".*\"|INTERFACE_LINK_LIBRARIES \"faiss\"|g" "%FAISS_CMAKE%"
+
+type "%FAISS_CMAKE%" | findstr /C:"INTERFACE_LINK_LIBRARIES"
+
 set EXTRA_CMAKE_ARGS=""
 if NOT "%cuda_compiler_version%"=="None" (
     set EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all"
@@ -18,6 +25,9 @@ cmake ^
     -DONNX_ENABLED=ON ^
     -DCMAKE_CXX_FLAGS=-DNOMINMAX ^
     -DMETIS_DIR=%LIBRARY_PREFIX% ^
+    -DFETCH_FAISS=OFF ^
+    -DFETCH_POSELIB=OFF ^
+    -DFETCH_ONNX=OFF ^
     -DCMAKE_CUDA_FLAGS=--use-local-env ^
     %EXTRA_CMAKE_ARGS% ^
     %SRC_DIR%

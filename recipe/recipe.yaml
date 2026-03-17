@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "4.0.1"
-  build_number: 0
+  build_number: 1
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
@@ -50,6 +50,8 @@ requirements:
       then: llvm-openmp
     - if: linux
       then: libgomp
+    - if: win
+      then: m2-sed
   host:
     - if: unix
       then:
@@ -92,11 +94,14 @@ requirements:
     - lz4-c
     - metis
     - openimageio
+    - poselib
+    - faiss
     - if: cuda == "enabled"
       then:
         - libcurand-dev
         - cuda-cudart-dev
         - cuda-version ==${{ cuda_compiler_version }}
+        - faiss-gpu
     - if: osx
       then: llvm-openmp
     - if: linux
