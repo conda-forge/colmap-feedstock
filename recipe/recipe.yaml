@@ -50,6 +50,8 @@ requirements:
       then: llvm-openmp
     - if: linux
       then: libgomp
+    - if: win
+      then: m2-sed
   host:
     - if: unix
       then:
