@@ -12,6 +12,8 @@ cuda_compiler_version:
 - '12.9'
 cxx_compiler:
 - vs2022
+eigen_abi_devel:
+- 5.0.1
 flann:
 - 1.9.2
 gflags:
