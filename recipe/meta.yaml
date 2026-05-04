@@ -63,6 +63,7 @@ requirements:
     - libboost-devel
     - suitesparse
     - eigen
+    - eigen-abi-devel
     - freeimage
     - glog
     - gflags
