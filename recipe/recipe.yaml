@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "4.0.4"
-  build_number: 0
+  build_number: 1
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
