@@ -1,6 +1,6 @@
 {% set name = "colmap" %}
 {% set version = "3.8" %}
-{% set build = 24 %}
+{% set build = 25 %}
 
 {% set processor = "cpu" if (cuda_compiler_version or "None") == "None" else "gpu" %}
 
@@ -19,6 +19,8 @@ source:
       - unvendor_vlfeat.patch  # [unix]
       - fix_find_lz4.patch
       - fix-cuda-toolkit.patch
+      - use_eigen_cmake_config.patch
+      - fix_missing_cassert.patch
       - 1809.patch  # [(cuda_compiler_version or "None").startswith("12")]
       - 1840.patch  # [(cuda_compiler_version or "None").startswith("12")]
       - 1823.patch  # [(cuda_compiler_version or "None").startswith("12")]
