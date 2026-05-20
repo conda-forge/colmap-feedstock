@@ -1,0 +1,23 @@
+diff --git a/src/base/image.cc b/src/base/image.cc
+--- a/src/base/image.cc
++++ b/src/base/image.cc
+@@ -31,6 +31,8 @@
+ 
+ #include "base/image.h"
+ 
++#include <cassert>
++
+ #include "base/pose.h"
+ #include "base/projection.h"
+ 
+diff --git a/src/optim/bundle_adjustment.cc b/src/optim/bundle_adjustment.cc
+--- a/src/optim/bundle_adjustment.cc
++++ b/src/optim/bundle_adjustment.cc
+@@ -31,6 +31,7 @@
+ 
+ #include "optim/bundle_adjustment.h"
+ 
++#include <cassert>
+ #include <iomanip>
+ 
+ #ifdef OPENMP_ENABLED

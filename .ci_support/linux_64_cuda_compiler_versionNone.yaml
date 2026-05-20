@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '13'
+- '14'
 c_stdlib:
 - sysroot
 c_stdlib_version:
@@ -13,13 +13,15 @@ channel_targets:
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
-- '12.6'
+- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '13'
+- '14'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
+eigen_abi_devel:
+- 5.0.1
 flann:
 - 1.9.2
 gflags:
@@ -52,7 +54,7 @@ sqlite:
 suitesparse:
 - '7'
 target_platform:
-- linux-aarch64
+- linux-64
 vlfeat:
 - 0.9.21
 zip_keys:
