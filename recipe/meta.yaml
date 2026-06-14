@@ -20,6 +20,7 @@ source:
       - fix_find_lz4.patch
       - fix-cuda-toolkit.patch
       - use_eigen_cmake_config.patch
+      - remove_boost_system_component.patch
       - fix_missing_cassert.patch
       - 1809.patch  # [(cuda_compiler_version or "None").startswith("12")]
       - 1840.patch  # [(cuda_compiler_version or "None").startswith("12")]
