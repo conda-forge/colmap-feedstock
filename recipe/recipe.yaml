@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   name: colmap
-  version: "4.1.0"
+  version: "4.1.1"
   build_number: 0
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
@@ -16,7 +16,7 @@ package:
 
 source:
   - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
-    sha256: fc944df46ee9c213d4256cec30c085a6baa67256e7e6e0be63b13ea43ce9fcf7
+    sha256: 0cadd938756d7046055751ca35bcf0d35911403fcb65b91d022ddc418dc110a5
     patches:
       - fix-onnx-include-path.patch
 
