@@ -96,7 +96,11 @@ requirements:
     - openimageio
     - poselib
     - faiss
-    - icu 78.3.* [build="*_1"]
+    # Temporary workaround about m.lib in pkg-config of old icu build
+    # REMOVE IN FUTURE UPDATE!
+    - if: win
+      then:
+      - icu 78.3.* [build="*_1"]
     - if: cuda == "enabled"
       then:
         - libcurand-dev
