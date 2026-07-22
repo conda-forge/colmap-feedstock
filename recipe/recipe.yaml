@@ -96,6 +96,7 @@ requirements:
     - openimageio
     - poselib
     - faiss
+    - icu 78.3.* [build="*_1"]
     - if: cuda == "enabled"
       then:
         - libcurand-dev
