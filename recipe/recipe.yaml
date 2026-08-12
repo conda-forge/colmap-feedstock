@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "4.1.1"
-  build_number: 1
+  build_number: 2
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
@@ -96,6 +96,7 @@ requirements:
     - openimageio
     - poselib
     - faiss
+    - libfaiss
     # Temporary workaround about m.lib in pkg-config of old icu build
     # REMOVE IN FUTURE UPDATE!
     - if: win
