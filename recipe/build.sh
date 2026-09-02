@@ -5,6 +5,14 @@ cd build
 
 CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
+if [[ "$target_platform" == "osx-arm64" ]]; then
+  # coreml_provider_factory.h does an unqualified #include "onnxruntime_c_api.h",
+  # which only resolves if that header's directory is on the include path -
+  # the onnxruntime-cpp conda package installs it nested under core/session/,
+  # unlike upstream's flat prebuilt onnxruntime release tarball layout.
+  CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include/onnxruntime/core/session"
+fi
+
 if [[ ! -z "${cuda_compiler_version+x}" && "${cuda_compiler_version}" != "None" ]]
   then
     EXTRA_CMAKE_ARGS="-DCMAKE_CUDA_ARCHITECTURES=all -DCUDA_ENABLED=ON"
