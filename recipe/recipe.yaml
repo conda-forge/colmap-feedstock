@@ -4,7 +4,7 @@ schema_version: 1
 context:
   name: colmap
   version: "4.2.1"
-  build_number: 0
+  build_number: 1
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
@@ -93,7 +93,12 @@ requirements:
         - gmp
     - lz4-c
     - metis
-    - openimageio
+    # libopenimageio (not the openimageio metapackage) so that its run_exports
+    # (libopenimageio >=x.y.z,<x.(y+1)) apply; the metapackage has none, and the
+    # libopenimageio pinning/migrations only see this name.
+    - libopenimageio
+    # OpenImageIOConfig.cmake does find_dependency(fmt) (header-only use)
+    - fmt
     - poselib
     - faiss
     - libfaiss
@@ -135,6 +140,10 @@ requirements:
         - vlfeat
     - if: linux
       then: libglu
+  ignore_run_exports:
+    by_name:
+      # only fmt::fmt-header-only via OpenImageIO, nothing is linked
+      - fmt
   run_exports:
     - ${{ pin_subpackage('colmap', upper_bound='x.x') }}
 
