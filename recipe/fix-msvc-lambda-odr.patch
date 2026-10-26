@@ -1,0 +1,124 @@
+diff --git a/src/colmap/feature/aliked.h b/src/colmap/feature/aliked.h
+index 0281b81..0e49493 100644
+--- a/src/colmap/feature/aliked.h
++++ b/src/colmap/feature/aliked.h
+@@ -59,24 +59,31 @@ struct AlikedExtractionOptions {
+ std::unique_ptr<FeatureExtractor> CreateAlikedFeatureExtractor(
+     const FeatureExtractionOptions& options);
+ 
++// Named functions instead of lambdas for default member initializers: MSVC
++// can give lambdas from different translation units the same name.
++inline BruteForceONNXMatchingOptions DefaultAlikedBruteForceMatchingOptions() {
++  BruteForceONNXMatchingOptions options;
++  options.min_cossim = 0.85;
++  options.max_ratio = 1.0;
++  options.cross_check = true;
++  options.model_path = kDefaultBruteForceONNXMatcherUri;
++  return options;
++}
++inline LightGlueONNXMatchingOptions DefaultAlikedLightGlueMatchingOptions() {
++  LightGlueONNXMatchingOptions options;
++  options.min_score = 0.1;
++  options.model_path = kDefaultAlikedLightGlueFeatureMatcherUri;
++  return options;
++}
++
+ struct AlikedMatchingOptions {
+   // Brute-force matching options.
+-  BruteForceONNXMatchingOptions brute_force = []() {
+-    BruteForceONNXMatchingOptions options;
+-    options.min_cossim = 0.85;
+-    options.max_ratio = 1.0;
+-    options.cross_check = true;
+-    options.model_path = kDefaultBruteForceONNXMatcherUri;
+-    return options;
+-  }();
++  BruteForceONNXMatchingOptions brute_force =
++      DefaultAlikedBruteForceMatchingOptions();
+ 
+   // LightGlue matching options.
+-  LightGlueONNXMatchingOptions lightglue = []() {
+-    LightGlueONNXMatchingOptions options;
+-    options.min_score = 0.1;
+-    options.model_path = kDefaultAlikedLightGlueFeatureMatcherUri;
+-    return options;
+-  }();
++  LightGlueONNXMatchingOptions lightglue =
++      DefaultAlikedLightGlueMatchingOptions();
+ 
+   bool Check() const;
+ };
+diff --git a/src/colmap/feature/loma.h b/src/colmap/feature/loma.h
+index 8afa14e..829c392 100644
+--- a/src/colmap/feature/loma.h
++++ b/src/colmap/feature/loma.h
+@@ -73,6 +73,17 @@ struct LomaExtractionOptions {
+ std::unique_ptr<FeatureExtractor> CreateLomaFeatureExtractor(
+     const FeatureExtractionOptions& options);
+ 
++// Named functions instead of lambdas for default member initializers: MSVC
++// can give lambdas from different translation units the same name.
++inline BruteForceONNXMatchingOptions DefaultLomaBruteForceMatchingOptions() {
++  BruteForceONNXMatchingOptions options;
++  options.min_cossim = 0.85;
++  options.max_ratio = 1.0;
++  options.cross_check = true;
++  options.model_path = kDefaultBruteForceONNXMatcherUri;
++  return options;
++}
++
+ struct LomaMatchingOptions {
+   // Per-variant fp32 and bf16 model paths.
+   struct Variant {
+@@ -95,14 +106,8 @@ struct LomaMatchingOptions {
+ 
+   // Brute-force matching options (reuses the generic ONNX matcher, which
+   // is descriptor-dimension agnostic).
+-  BruteForceONNXMatchingOptions brute_force = []() {
+-    BruteForceONNXMatchingOptions options;
+-    options.min_cossim = 0.85;
+-    options.max_ratio = 1.0;
+-    options.cross_check = true;
+-    options.model_path = kDefaultBruteForceONNXMatcherUri;
+-    return options;
+-  }();
++  BruteForceONNXMatchingOptions brute_force =
++      DefaultLomaBruteForceMatchingOptions();
+ 
+   bool Check() const;
+ };
+diff --git a/src/colmap/feature/sift.h b/src/colmap/feature/sift.h
+index c39d5c5..510d0c4 100644
+--- a/src/colmap/feature/sift.h
++++ b/src/colmap/feature/sift.h
+@@ -109,6 +109,15 @@ struct SiftExtractionOptions {
+ std::unique_ptr<FeatureExtractor> CreateSiftFeatureExtractor(
+     const FeatureExtractionOptions& options);
+ 
++// Named functions instead of lambdas for default member initializers: MSVC
++// can give lambdas from different translation units the same name.
++inline LightGlueONNXMatchingOptions DefaultSiftLightGlueMatchingOptions() {
++  LightGlueONNXMatchingOptions options;
++  options.min_score = 0.1;
++  options.model_path = kDefaultSiftLightGlueFeatureMatcherUri;
++  return options;
++}
++
+ struct SiftMatchingOptions {
+   // Maximum distance ratio between first and second best match.
+   double max_ratio = 0.8;
+@@ -127,12 +136,8 @@ struct SiftMatchingOptions {
+       cpu_descriptor_index_cache = nullptr;
+ 
+   // LightGlue matching options.
+-  LightGlueONNXMatchingOptions lightglue = []() {
+-    LightGlueONNXMatchingOptions options;
+-    options.min_score = 0.1;
+-    options.model_path = kDefaultSiftLightGlueFeatureMatcherUri;
+-    return options;
+-  }();
++  LightGlueONNXMatchingOptions lightglue =
++      DefaultSiftLightGlueMatchingOptions();
+ 
+   bool Check() const;
+ };
