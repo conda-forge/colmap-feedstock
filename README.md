@@ -3,11 +3,24 @@ About colmap-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/colmap-feedstock/blob/main/LICENSE.txt)
 
+
+About colmap
+------------
+
 Home: https://colmap.github.io/
 
 Package license: BSD-3-Clause
 
 Summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
+
+About pycolmap
+--------------
+
+Home: https://colmap.github.io/
+
+Package license: BSD-3-Clause
+
+Summary: pycolmap exposes to Python most COLMAP reconstruction objects, such as Cameras and Points3D, as well as estimators for absolute and relative poses.
 
 Current build status
 ====================
@@ -61,6 +74,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-colmap-green.svg)](https://anaconda.org/conda-forge/colmap) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/colmap.svg)](https://anaconda.org/conda-forge/colmap) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/colmap.svg)](https://anaconda.org/conda-forge/colmap) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/colmap.svg)](https://anaconda.org/conda-forge/colmap) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pycolmap-green.svg)](https://anaconda.org/conda-forge/pycolmap) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pycolmap.svg)](https://anaconda.org/conda-forge/pycolmap) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pycolmap.svg)](https://anaconda.org/conda-forge/pycolmap) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pycolmap.svg)](https://anaconda.org/conda-forge/pycolmap) |
 
 Installing colmap
 =================
@@ -79,7 +93,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install colmap
+conda install colmap pycolmap
 ```
 
 </details>
@@ -88,7 +102,7 @@ conda install colmap
 <summary>With mamba</summary>
 
 ```
-mamba install colmap
+mamba install colmap pycolmap
 ```
 
 </details>
@@ -98,9 +112,9 @@ mamba install colmap
 
 ```
 # for adding to your local project
-pixi add colmap
+pixi add colmap pycolmap
 # for installing globally
-pixi global install colmap
+pixi global install colmap pycolmap
 ```
 
 </details>
