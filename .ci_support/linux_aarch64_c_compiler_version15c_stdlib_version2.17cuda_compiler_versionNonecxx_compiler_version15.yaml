@@ -1,3 +1,5 @@
+DOCKER_PLATFORM:
+- linux/aarch64
 c_compiler:
 - gcc
 c_compiler_version:
@@ -51,8 +53,8 @@ metis:
 pin_run_as_build:
   vlfeat:
     max_pin: x.x.x
-qt_main:
-- '5.15'
+qt6_main:
+- '6.11'
 sqlite:
 - '3'
 suitesparse:
