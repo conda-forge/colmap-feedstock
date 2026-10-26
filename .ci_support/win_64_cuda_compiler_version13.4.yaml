@@ -36,8 +36,8 @@ lz4_c:
 - '1.10'
 metis:
 - 5.1.0
-qt_main:
-- '5.15'
+qt6_main:
+- '6.11'
 sqlite:
 - '3'
 suitesparse:
