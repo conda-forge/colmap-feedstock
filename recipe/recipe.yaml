@@ -25,6 +25,9 @@ source:
       - if: win
         then: disable-parallel-builds.patch
 
+build:
+  number: ${{ build_number }}
+
 outputs:
   - package:
       name: colmap
@@ -328,6 +331,18 @@ outputs:
       homepage: https://colmap.github.io/
 
 
+about:
+  license: BSD-3-Clause
+  license_file:
+    - COPYING.txt
+    - src/thirdparty/LSD/LICENSE
+    - src/thirdparty/PoissonRecon/LICENSE
+    - src/thirdparty/SiftGPU/LICENSE
+    - src/thirdparty/VLFeat/LICENSE
+  summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
+  homepage: https://colmap.github.io/
+
 extra:
+  feedstock-name: colmap
   recipe-maintainers:
     - Tobias-Fischer
