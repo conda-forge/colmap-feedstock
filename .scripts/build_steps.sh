@@ -74,7 +74,26 @@ setup_conda_rc "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 echo Running build setup
 source run_conda_forge_build_setup
 
+(
+source /etc/os-release
+MAJOR_VERSION_ID="${VERSION_ID%%.*}"
+if [[ "$ID" == "almalinux" && "$MAJOR_VERSION_ID" -ge 10 ]]; then
+    # Enable more repositories for Alma 10
+    # e.g. xvfb was in appstream but moved to devel in alma10
+    /usr/bin/sudo -n yum install -y almalinux-release-devel
+fi
+# Due to https://bugzilla.redhat.com/show_bug.cgi?id=1537564 old versions of rpm
+# are drastically slowed down when the number of file descriptors is very high.
+# This can be visible during a `yum install` step of a feedstock build.
+# => Set a lower limit in a subshell for the `yum install`s only.
+ulimit -n 1024
 
+# Install the yum requirements defined canonically in the
+# "recipe/yum_requirements.txt" file. After updating that file,
+# run "conda smithy rerender" and this line will be updated
+# automatically.
+/usr/bin/sudo -n yum install -y mesa-libGL libselinux libXdamage libXxf86vm libXext
+)
 
 if [[ "${HOST_PLATFORM}" != "${BUILD_PLATFORM}" ]] && [[ "${HOST_PLATFORM}" != linux-* ]] && [[ "${BUILD_WITH_CONDA_DEBUG:-0}" != 1 ]]; then
     EXTRA_CB_OPTIONS="${EXTRA_CB_OPTIONS:-} --test skip"

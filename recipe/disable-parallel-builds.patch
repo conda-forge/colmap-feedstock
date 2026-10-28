@@ -1,0 +1,15 @@
+diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
+index 1a72dfea75..2ad44e54c9 100644
+--- a/python/CMakeLists.txt
++++ b/python/CMakeLists.txt
+@@ -17,8 +17,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+     add_compile_definitions(NOMINMAX)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+     # Enable object level parallel builds in Visual Studio.
+-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
++    # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
++    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+     add_compile_options($<$<COMPILE_LANGUAGE:C,CXX>:/W3>)
+     if(WERROR_ENABLED)
+         add_compile_options($<$<COMPILE_LANGUAGE:C,CXX>:/WX>)

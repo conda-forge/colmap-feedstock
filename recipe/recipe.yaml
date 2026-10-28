@@ -2,173 +2,329 @@
 schema_version: 1
 
 context:
-  name: colmap
   version: "4.2.1"
-  build_number: 4
+  build_number: 5
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
   string_prefix: ${{ cuda_build_string if cuda ==  "enabled" else "cpu_" }}
 
-package:
-  name: ${{ name }}
+recipe:
+  name: colmap-split
   version: ${{ version }}
 
 source:
-  - url: https://github.com/${{ name }}/${{ name }}/archive/${{ version }}.tar.gz
+  - url: https://github.com/colmap/colmap/archive/${{ version }}.tar.gz
     sha256: 15fb9e333541676e4ee9bc5d8ab95a3ed6e549a20eb13fc5aafd04ca06c76c88
     patches:
       - fix-onnx-include-path.patch
       # https://github.com/colmap/colmap/pull/4900
       - fix-msvc-lambda-odr.patch
+      # pycolmap (python/CMakeLists.txt only)
+      - bump-min-cmake.patch
+      - if: win
+        then: disable-parallel-builds.patch
 
 build:
   number: ${{ build_number }}
-  string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
-  variant:
-    use_keys:
-      # use cuda from the variant config, e.g. to build multiple CUDA variants
-      - ${{ "cuda" if cuda == "enabled" }}
-    # this will down-prioritize the cpu variant versus other variants of the package
-    down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
-  script:
-    file: build
-    env:
-      package_version: ${{ version }}
 
-requirements:
-  build:
-    - ${{ compiler('cxx') }}
-    - ${{ compiler('c') }}
-    - ${{ stdlib("c") }}
-    - if: cuda == "enabled"
-      then: ${{ compiler('cuda') }}
-    - cmake
-    - if: unix
-      then: make
-    - pkg-config
-    - ninja
-    - if: osx
-      then: llvm-openmp
-    - if: linux
-      then: libgomp
-    - if: win
-      then: m2-sed
-  host:
-    - if: unix
-      then:
-        - xorg-libxext
-        - xorg-libxdmcp
-        - xorg-libxau
-        - libxcb
-        - xorg-libxfixes
-        - xorg-libxrender
-        - xorg-libx11
-        - xorg-libice
-        - xorg-libsm
-    - if: linux
-      then:
-        - libglu
-        - libgl-devel
-        - libopengl-devel
-    - libblas
-    - libcblas
-    - libboost-devel
-    - suitesparse
-    - eigen
-    - eigen-abi-devel
-    - freeimage
-    - glog
-    - gflags
-    - glew
-    - cgal-cpp
-    - ceres-solver
-    - if: cuda == "enabled"
-      then: ceres-solver * [build="gpu*"]
-      else:
-        - ceres-solver * [build="cpu*"]
-        # avoid pulling the CUDA build of faiss (and with it CUDA) into cpu builds
-        - faiss * [build="*_cpu"]
-        - libfaiss * [build="*_cpu"]
-    - qt6-main
-    - git
-    - flann
-    - sqlite
-    - if: unix
-      then:
-        - vlfeat
+outputs:
+  - package:
+      name: colmap
+      version: ${{ version }}
+    build:
+      number: ${{ build_number }}
+      string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
+      variant:
+        use_keys:
+          # use cuda from the variant config, e.g. to build multiple CUDA variants
+          - ${{ "cuda" if cuda == "enabled" }}
+        # this will down-prioritize the cpu variant versus other variants of the package
+        down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
+      script:
+        file: build
+        env:
+          package_version: ${{ version }}
+
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('c') }}
+        - ${{ stdlib("c") }}
+        - if: cuda == "enabled"
+          then: ${{ compiler('cuda') }}
+        - cmake
+        - if: unix
+          then: make
+        - pkg-config
+        - ninja
+        - if: osx
+          then: llvm-openmp
+        - if: linux
+          then: libgomp
+        - if: win
+          then: m2-sed
+      host:
+        - if: unix
+          then:
+            - xorg-libxext
+            - xorg-libxdmcp
+            - xorg-libxau
+            - libxcb
+            - xorg-libxfixes
+            - xorg-libxrender
+            - xorg-libx11
+            - xorg-libice
+            - xorg-libsm
+        - if: linux
+          then:
+            - libglu
+            - libgl-devel
+            - libopengl-devel
+        - libblas
+        - libcblas
+        - libboost-devel
+        - suitesparse
+        - eigen
+        - eigen-abi-devel
+        - freeimage
+        - glog
+        - gflags
+        - glew
+        - cgal-cpp
+        - ceres-solver
+        - if: cuda == "enabled"
+          then: ceres-solver * [build="gpu*"]
+          else:
+            - ceres-solver * [build="cpu*"]
+            # avoid pulling the CUDA build of faiss (and with it CUDA) into cpu builds
+            - faiss * [build="*_cpu"]
+            - libfaiss * [build="*_cpu"]
+        - qt6-main
+        - git
+        - flann
+        - sqlite
+        - if: unix
+          then:
+            - vlfeat
+            - gmp
+        - lz4-c
+        - metis
+        # libopenimageio (not the openimageio metapackage) so that its run_exports
+        # (libopenimageio >=x.y.z,<x.(y+1)) apply; the metapackage has none, and the
+        # libopenimageio pinning/migrations only see this name.
+        - libopenimageio
+        # OpenImageIOConfig.cmake does find_dependency(fmt) (header-only use)
+        - fmt
+        - poselib
+        - faiss
+        - libfaiss
+        - if: cuda == "enabled"
+          then:
+            - libcurand-dev
+            - cuda-cudart-dev
+            - cuda-version ==${{ cuda_compiler_version }}
+            - faiss-gpu
+        - if: osx
+          then: llvm-openmp
+        - if: linux
+          then: libgomp
+        - if: not (osx and x86_64)
+          then:
+            - onnxruntime
+            - onnxruntime-cpp
+      run:
+        - flann
+        - if: cuda == "enabled"
+          then:
+            - __cuda >=${{ cuda_compiler_version }}  # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
+        - if: unix
+          then:
+            - xorg-libxext
+            - xorg-libxdmcp
+            - xorg-libxau
+            - libxcb
+            - xorg-libxfixes
+            - xorg-libxrender
+            - xorg-libx11
+            - xorg-libice
+            - xorg-libsm
+            - vlfeat
+        - if: linux
+          then: libglu
+      ignore_run_exports:
+        by_name:
+          # only fmt::fmt-header-only via OpenImageIO, nothing is linked
+          - fmt
+      run_exports:
+        - ${{ pin_subpackage('colmap', upper_bound='x.x') }}
+
+    tests:
+      - script:
+          - if: win
+            then:
+              - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)
+              - if exist %PREFIX%\\Library\\lib\\colmap_exe.lib (exit 0) else (exit 1)
+              - if: cuda == "enabled"
+                then: if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)
+          - if: unix
+            then:
+              - test -f $PREFIX/bin/colmap
+              - test -f $PREFIX/lib/libcolmap_exe.a
+              - test -f $PREFIX/share/colmap/colmap-config.cmake
+              - if: cuda == "enabled"
+                then: test -f $PREFIX/lib/libcolmap_util_cuda.a
+
+    about:
+      license: BSD-3-Clause
+      license_file:
+        - COPYING.txt
+        - src/thirdparty/LSD/LICENSE
+        - src/thirdparty/PoissonRecon/LICENSE
+        - src/thirdparty/SiftGPU/LICENSE
+        - src/thirdparty/VLFeat/LICENSE
+      summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
+      homepage: https://colmap.github.io/
+
+
+  - package:
+      name: pycolmap
+      version: ${{ version }}
+    build:
+      number: ${{ build_number }}
+      string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
+      variant:
+        use_keys:
+          # use cuda from the variant config, e.g. to build multiple CUDA variants
+          - ${{ "cuda" if cuda == "enabled" }}
+        # this will down-prioritize the cpu variant versus other variants of the package
+        down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
+      script:
+        - if: win
+          then:
+            - set CMAKE_BUILD_TYPE=Release
+            - set CMAKE_BUILD_PARALLEL_LEVEL=1
+            - set CMAKE_ARGS=-G Ninja
+            - set CMAKE_BUILD_PARALLEL_LEVEL=1
+            # Kill LTCG/IPO and PDBs to reduce linker memory
+            - set CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF
+            - set CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_MSVC_DEBUG_INFORMATION_FORMAT=""
+            - set CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_EXE_LINKER_FLAGS="/INCREMENTAL:NO /OPT:REF /OPT:ICF"
+            - set CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_SHARED_LINKER_FLAGS="/INCREMENTAL:NO /OPT:REF /OPT:ICF"
+            - set "FAISS_CMAKE=%LIBRARY_PREFIX%\lib\cmake\faiss\faiss-targets.cmake"
+            - sed -i "s|INTERFACE_LINK_LIBRARIES \".*\"|INTERFACE_LINK_LIBRARIES \"faiss\"|g" "%FAISS_CMAKE%"
+            - set CUDAFLAGS=--use-local-env
+        - if: osx
+          then: CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+        - if: build_platform != target_platform
+          then: export CMAKE_ARGS="${CMAKE_ARGS} -DGENERATE_STUBS=OFF"
+        - ${{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
+
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('c') }}
+        - ${{ stdlib("c") }}
+        - if: cuda == "enabled"
+          then: ${{ compiler('cuda') }}
+        - cmake
+        - if: unix
+          then: make
+        - ninja
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - pybind11
+            - pybind11-stubgen
+            - numpy
+            - scikit-build
+            - scikit-build-core
+        - if: osx
+          then: llvm-openmp
+        - if: linux
+          then: libgomp
+        - if: win
+          then: m2-sed
+      host:
+        - if: linux
+          then: libgl-devel
+        - pip
+        - python
+        - scikit-build
+        - scikit-build-core
+        - pybind11
+        # run_exports `pybind11-abi ==<internals version>`: pycolmap passes
+        # ceres::Problem / CostFunction objects to pyceres, which only works if both
+        # were built with the same pybind11 internals version.
+        - pybind11-abi
+        - pybind11-stubgen
+        - numpy
+        - ruff
+        - black
+        - isort
+        - libboost-devel
+        # the colmap output built from the same source in this job
+        - ${{ pin_subpackage('colmap', exact=True) }}
+        - if: cuda == "disabled"
+          then:
+            # avoid pulling CUDA builds (and with them CUDA) into cpu builds
+            - ceres-solver * [build="cpu*"]
+            - libfaiss * [build="*_cpu"]
+        - eigen-abi-devel
+        - libblas
+        - libcblas
+        - cgal-cpp
+        - sqlite
+        - flann
+        - glog
+        - gflags
+        - flann
+        - freeimage
+        - metis
+        - ceres-solver
+        - glew
+        - if: unix
+          then: vlfeat
         - gmp
-    - lz4-c
-    - metis
-    # libopenimageio (not the openimageio metapackage) so that its run_exports
-    # (libopenimageio >=x.y.z,<x.(y+1)) apply; the metapackage has none, and the
-    # libopenimageio pinning/migrations only see this name.
-    - libopenimageio
-    # OpenImageIOConfig.cmake does find_dependency(fmt) (header-only use)
-    - fmt
-    - poselib
-    - faiss
-    - libfaiss
-    # Temporary workaround about m.lib in pkg-config of old icu build
-    # REMOVE IN FUTURE UPDATE!
-    - if: win
-      then:
-        - icu 78.3.* [build="*_1"]
-    - if: cuda == "enabled"
-      then:
-        - libcurand-dev
-        - cuda-cudart-dev
-        - cuda-version ==${{ cuda_compiler_version }}
-        - faiss-gpu
-    - if: osx
-      then: llvm-openmp
-    - if: linux
-      then: libgomp
-    - if: not (osx and x86_64)
-      then:
-        - onnxruntime
-        - onnxruntime-cpp
-  run:
-    - flann
-    - if: cuda == "enabled"
-      then:
-        - __cuda >=${{ cuda_compiler_version }}  # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
-    - if: unix
-      then:
-        - xorg-libxext
-        - xorg-libxdmcp
-        - xorg-libxau
-        - libxcb
-        - xorg-libxfixes
-        - xorg-libxrender
-        - xorg-libx11
-        - xorg-libice
-        - xorg-libsm
-        - vlfeat
-    - if: linux
-      then: libglu
-  ignore_run_exports:
-    by_name:
-      # only fmt::fmt-header-only via OpenImageIO, nothing is linked
-      - fmt
-  run_exports:
-    - ${{ pin_subpackage('colmap', upper_bound='x.x') }}
+        - qt6-main
+        - lz4-c
+        - fmt
+        - libfaiss
+        # libopenimageio (not the openimageio metapackage): only it carries
+        # run_exports (libopenimageio >=x.y.z,<x.(y+1)), and only this name is
+        # tracked by the global pinning / migrator.
+        - libopenimageio
+        - if: cuda == "enabled"
+          then:
+            - cuda-cudart-dev ${{ cuda_compiler_version }}.*
+            - libcurand-dev
+            - cuda-version ${{ cuda_compiler_version }}.*
+      run:
+        - python
+        - numpy
+        - if: cuda == "enabled"
+          then: __cuda >=${{ cuda_compiler_version }}
 
-tests:
-  - script:
-      - if: win
-        then:
-          - if exist %PREFIX%\\Library\\bin\\colmap.exe (exit 0) else (exit 1)
-          - if exist %PREFIX%\\Library\\lib\\colmap_exe.lib (exit 0) else (exit 1)
-          - if: cuda == "enabled"
-            then: if exist %PREFIX%\\Library\\lib\\colmap_cuda.lib (exit 0) else (exit 1)
-      - if: unix
-        then:
-          - test -f $PREFIX/bin/colmap
-          - test -f $PREFIX/lib/libcolmap_exe.a
-          - test -f $PREFIX/share/colmap/colmap-config.cmake
-          - if: cuda == "enabled"
-            then: test -f $PREFIX/lib/libcolmap_util_cuda.a
+    tests:
+      - python:
+          imports:
+            - pycolmap
+          pip_check: false
+      - requirements:
+          run:
+            - pip
+        script:
+          - pip check
+          - python -c "import pycolmap; reconstruction = pycolmap.Reconstruction(); x = reconstruction.points3D"
+
+    about:
+      license: BSD-3-Clause
+      license_file:
+        - COPYING.txt
+      summary: pycolmap exposes to Python most COLMAP reconstruction objects, such as Cameras and Points3D, as well as estimators for absolute and relative poses.
+      homepage: https://colmap.github.io/
+
 
 about:
   license: BSD-3-Clause
@@ -182,5 +338,6 @@ about:
   homepage: https://colmap.github.io/
 
 extra:
+  feedstock-name: colmap
   recipe-maintainers:
     - Tobias-Fischer
