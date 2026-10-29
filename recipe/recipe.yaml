@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   version: "4.2.1"
-  build_number: 5
+  build_number: 6
 
   cuda: ${{ "enabled" if cuda_compiler_version != "None" else "disabled" }}
   cuda_build_string: cuda_${{ cuda_compiler_version | version_to_buildstring }}
@@ -100,7 +100,10 @@ outputs:
             # avoid pulling the CUDA build of faiss (and with it CUDA) into cpu builds
             - faiss * [build="*_cpu"]
             - libfaiss * [build="*_cpu"]
-        - qt6-main
+        # Build against Qt 6.11.2 until pyside6 6.11.3 is on conda-forge
+        # (conda-forge/pyside2-feedstock#308); built against 6.11.3, colmap and
+        # pycolmap cannot be installed next to pyside6 6.11.2.
+        - qt6-main <6.11.3
         - git
         - flann
         - sqlite
@@ -287,7 +290,7 @@ outputs:
         - if: unix
           then: vlfeat
         - gmp
-        - qt6-main
+        - qt6-main <6.11.3  # see the colmap output
         - lz4-c
         - fmt
         - libfaiss
