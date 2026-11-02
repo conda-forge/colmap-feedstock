@@ -26,6 +26,13 @@ else
   EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DONNX_ENABLED=OFF"
 fi
 
+# CGAL (GPL-3.0 packages for Delaunay/advancing-front meshing) only in the gpl variant
+if [[ "${dep_license_family}" == "gpl" ]]; then
+  EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DCGAL_ENABLED=ON"
+else
+  EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS} -DCGAL_ENABLED=OFF"
+fi
+
 cmake ${CMAKE_ARGS} \
       -DCMAKE_BUILD_TYPE=Release \
       -DBOOST_STATIC=OFF \

@@ -26,8 +26,6 @@ glew:
 - '2.3'
 glog:
 - '0.7'
-gmp:
-- '6'
 libblas:
 - 3.9.* *netlib
 libboost_devel:

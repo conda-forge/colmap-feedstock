@@ -16,8 +16,16 @@ if NOT "%cuda_compiler_version%"=="None" (
     set CUDA_ENABLED=OFF
 )
 
+:: CGAL (GPL-3.0 packages) only in the gpl variant
+if "%dep_license_family%"=="gpl" (
+    set CGAL_ENABLED=ON
+) else (
+    set CGAL_ENABLED=OFF
+)
+
 cmake ^
     -G "Ninja" ^
+    -DCGAL_ENABLED=%CGAL_ENABLED% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DCMAKE_BUILD_TYPE=Release ^
     -DBOOST_STATIC=OFF ^

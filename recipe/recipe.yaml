@@ -98,7 +98,8 @@ outputs:
         - glog
         - gflags
         - glew
-        - cgal-cpp
+        - if: dep_license_family == "gpl"
+          then: cgal-cpp
         - ceres-solver
         - if: cuda == "enabled"
           then: ceres-solver * [build="gpu${{ dep_license_family }}*"]
@@ -115,9 +116,9 @@ outputs:
         - flann
         - sqlite
         - if: unix
-          then:
-            - vlfeat
-            - gmp
+          then: vlfeat
+        - if: unix and dep_license_family == "gpl"
+          then: gmp
         - lz4-c
         - metis
         # libopenimageio (not the openimageio metapackage) so that its run_exports
@@ -288,7 +289,8 @@ outputs:
         - eigen-abi-devel
         - libblas
         - libcblas
-        - cgal-cpp
+        - if: dep_license_family == "gpl"
+          then: cgal-cpp
         - sqlite
         - flann
         - glog
@@ -302,7 +304,8 @@ outputs:
         - glew
         - if: unix
           then: vlfeat
-        - gmp
+        - if: unix and dep_license_family == "gpl"
+          then: gmp
         - qt6-main <6.11.3  # see the colmap output
         - lz4-c
         - fmt
