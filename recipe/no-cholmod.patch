@@ -1,0 +1,60 @@
+diff --git a/cmake/FindDependencies.cmake b/cmake/FindDependencies.cmake
+index e26d5e9..3287bca 100644
+--- a/cmake/FindDependencies.cmake
++++ b/cmake/FindDependencies.cmake
+@@ -91,8 +91,6 @@ find_package(Glew ${COLMAP_FIND_TYPE})
+ 
+ find_package(Git)
+ 
+-find_package(CHOLMOD REQUIRED)
+-
+ # Ceres and glog expose gflags::gflags in their interface dependencies, but gflags
+ # only defines the namespaced target when GFLAGS_USE_TARGET_NAMESPACE is ON. Bridge
+ # the gap so consumers can resolve the expected target when only the plain target exists.
+diff --git a/src/colmap/optim/CMakeLists.txt b/src/colmap/optim/CMakeLists.txt
+index c963409..a49b5d5 100644
+--- a/src/colmap/optim/CMakeLists.txt
++++ b/src/colmap/optim/CMakeLists.txt
+@@ -45,7 +45,6 @@ COLMAP_ADD_LIBRARY(
+         colmap_math
+         colmap_util
+         Eigen3::Eigen
+-        CHOLMOD::CHOLMOD
+ )
+ if(OPENMP_FOUND)
+     target_link_libraries(colmap_optim PUBLIC OpenMP::OpenMP_CXX)
+diff --git a/src/colmap/optim/sparse_cholesky.h b/src/colmap/optim/sparse_cholesky.h
+index 6dab1a4..5003289 100644
+--- a/src/colmap/optim/sparse_cholesky.h
++++ b/src/colmap/optim/sparse_cholesky.h
+@@ -29,17 +29,15 @@
+ 
+ #pragma once
+ 
+-#include <Eigen/CholmodSupport>
+ #include <Eigen/SparseCholesky>
+ #include <Eigen/SparseCore>
+ 
+ namespace colmap {
+ 
+-// Sparse Cholesky solver that tries CHOLMOD supernodal LLT first (fastest for
+-// large systems) and falls back to Eigen's simplicial LDLT (more numerically
+-// tolerant) once supernodal reports the matrix is not positive definite.
+-// Supernodal CHOLMOD aborts at the first non-positive pivot in a dense block,
+-// which can trigger on mathematically PD but ill-conditioned systems.
++// Sparse Cholesky solver that tries Eigen's simplicial LLT first and falls back
++// to simplicial LDLT (more numerically tolerant) when the matrix is not
++// positive definite. CHOLMOD (GPL parts) is not used, so that COLMAP can be
++// linked without GPL libraries.
+ class SparseCholeskyWithFallbackSolver {
+  public:
+   // One-shot factorization (analyze + factorize).
+@@ -53,7 +51,7 @@ class SparseCholeskyWithFallbackSolver {
+   bool Solve(const Eigen::VectorXd& b, Eigen::VectorXd* x) const;
+ 
+  private:
+-  Eigen::CholmodSupernodalLLT<Eigen::SparseMatrix<double>> supernodal_;
++  Eigen::SimplicialLLT<Eigen::SparseMatrix<double>> supernodal_;
+   Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> ldlt_;
+   bool use_ldlt_ = false;
+ };
