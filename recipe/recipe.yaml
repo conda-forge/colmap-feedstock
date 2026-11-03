@@ -24,21 +24,27 @@ source:
       - bump-min-cmake.patch
       - if: win
         then: disable-parallel-builds.patch
+      # lgpl variant: no CHOLMOD (its supernodal parts are GPL); the sparse
+      # Cholesky in rotation averaging then uses Eigen's simplicial solver
+      - if: dep_license_family == "lgpl"
+        then: no-cholmod.patch
 
 build:
-  number: ${{ build_number }}
+  number: ${{ build_number if dep_license_family == "lgpl" else build_number + 200 }}
 
 outputs:
   - package:
       name: colmap
       version: ${{ version }}
     build:
-      number: ${{ build_number }}
-      string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
+      number: ${{ build_number if dep_license_family == "lgpl" else build_number + 200 }}
+      string: ${{ string_prefix }}${{ dep_license_family }}_h${{ hash }}_${{ build_number if dep_license_family == "lgpl" else build_number + 200 }}
       variant:
         use_keys:
           # use cuda from the variant config, e.g. to build multiple CUDA variants
           - ${{ "cuda" if cuda == "enabled" }}
+          # lgpl: no GPL library linked (no SuiteSparse); gpl: with SuiteSparse
+          - dep_license_family
         # this will down-prioritize the cpu variant versus other variants of the package
         down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
       script:
@@ -84,19 +90,21 @@ outputs:
         - libblas
         - libcblas
         - libboost-devel
-        - suitesparse
+        - if: dep_license_family == "gpl"
+          then: suitesparse
         - eigen
         - eigen-abi-devel
         - freeimage
         - glog
         - gflags
         - glew
-        - cgal-cpp
+        - if: dep_license_family == "gpl"
+          then: cgal-cpp
         - ceres-solver
         - if: cuda == "enabled"
-          then: ceres-solver * [build="gpu*"]
+          then: ceres-solver * [build="gpu${{ dep_license_family }}*"]
           else:
-            - ceres-solver * [build="cpu*"]
+            - ceres-solver * [build="cpu${{ dep_license_family }}*"]
             # avoid pulling the CUDA build of faiss (and with it CUDA) into cpu builds
             - faiss * [build="*_cpu"]
             - libfaiss * [build="*_cpu"]
@@ -108,9 +116,9 @@ outputs:
         - flann
         - sqlite
         - if: unix
-          then:
-            - vlfeat
-            - gmp
+          then: vlfeat
+        - if: unix and dep_license_family == "gpl"
+          then: gmp
         - lz4-c
         - metis
         # libopenimageio (not the openimageio metapackage) so that its run_exports
@@ -138,6 +146,8 @@ outputs:
             - onnxruntime-cpp
       run:
         - flann
+        - if: dep_license_family == "lgpl"
+          then: ceres-solver * [build="*lgpl*"]
         - if: cuda == "enabled"
           then:
             - __cuda >=${{ cuda_compiler_version }}  # needed to ensure cuda packages are only installed in cuda environments and fallback to cpu builds otherwise
@@ -194,12 +204,14 @@ outputs:
       name: pycolmap
       version: ${{ version }}
     build:
-      number: ${{ build_number }}
-      string: ${{ string_prefix }}h${{ hash }}_${{ build_number }}
+      number: ${{ build_number if dep_license_family == "lgpl" else build_number + 200 }}
+      string: ${{ string_prefix }}${{ dep_license_family }}_h${{ hash }}_${{ build_number if dep_license_family == "lgpl" else build_number + 200 }}
       variant:
         use_keys:
           # use cuda from the variant config, e.g. to build multiple CUDA variants
           - ${{ "cuda" if cuda == "enabled" }}
+          # lgpl: no GPL library linked (no SuiteSparse); gpl: with SuiteSparse
+          - dep_license_family
         # this will down-prioritize the cpu variant versus other variants of the package
         down_prioritize_variant: ${{ 0 if cuda == "enabled" else 1 }}
       script:
@@ -272,12 +284,13 @@ outputs:
         - if: cuda == "disabled"
           then:
             # avoid pulling CUDA builds (and with them CUDA) into cpu builds
-            - ceres-solver * [build="cpu*"]
+            - ceres-solver * [build="cpu${{ dep_license_family }}*"]
             - libfaiss * [build="*_cpu"]
         - eigen-abi-devel
         - libblas
         - libcblas
-        - cgal-cpp
+        - if: dep_license_family == "gpl"
+          then: cgal-cpp
         - sqlite
         - flann
         - glog
@@ -286,10 +299,13 @@ outputs:
         - freeimage
         - metis
         - ceres-solver
+        - if: cuda == "enabled"
+          then: ceres-solver * [build="gpu${{ dep_license_family }}*"]
         - glew
         - if: unix
           then: vlfeat
-        - gmp
+        - if: unix and dep_license_family == "gpl"
+          then: gmp
         - qt6-main <6.11.3  # see the colmap output
         - lz4-c
         - fmt
@@ -306,6 +322,10 @@ outputs:
       run:
         - python
         - numpy
+        - if: dep_license_family == "lgpl"
+          then: ceres-solver * [build="*lgpl*"]
+        - if: dep_license_family == "lgpl"
+          then: colmap * [build="*lgpl*"]
         - if: cuda == "enabled"
           then: __cuda >=${{ cuda_compiler_version }}
 

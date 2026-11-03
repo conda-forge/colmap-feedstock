@@ -20,6 +20,8 @@ cxx_compiler:
 - gxx
 cxx_compiler_version:
 - '15'
+dep_license_family:
+- gpl
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma10
 eigen_abi_devel:
@@ -65,8 +67,6 @@ python:
 - 3.12.* *_cpython
 - 3.13.* *_cp313
 - 3.14.* *_cp314
-qt6_main:
-- '6.11'
 sqlite:
 - '3'
 suitesparse:

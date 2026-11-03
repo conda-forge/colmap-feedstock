@@ -1,17 +1,25 @@
+MACOSX_SDK_VERSION:
+- '11.0'
 c_compiler:
-- vs2022
+- clang
+c_compiler_version:
+- '21'
 c_stdlib:
-- vs
+- macosx_deployment_target
+c_stdlib_version:
+- '11.0'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler:
-- cuda-nvcc
 cuda_compiler_version:
-- '13.4'
+- None
 cxx_compiler:
-- vs2022
+- clangxx
+cxx_compiler_version:
+- '21'
+dep_license_family:
+- gpl
 eigen_abi_devel:
 - 5.0.1
 flann:
@@ -34,8 +42,14 @@ libcblas:
 - 3.9.* *netlib
 libopenimageio:
 - '3.2'
+libxcb:
+- '1'
+llvm_openmp:
+- '21'
 lz4_c:
 - '1.10'
+macos_machine:
+- arm64-apple-darwin20.0.0
 metis:
 - 5.1.0
 numpy:
@@ -44,6 +58,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
+  vlfeat:
+    max_pin: x.x.x
 pybind11_abi:
 - '11'
 python:
@@ -51,11 +67,14 @@ python:
 - 3.12.* *_cpython
 - 3.13.* *_cp313
 - 3.14.* *_cp314
-qt6_main:
-- '6.11'
 sqlite:
 - '3'
 suitesparse:
 - '7'
 target_platform:
-- win-64
+- osx-arm64
+vlfeat:
+- 0.9.21
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version

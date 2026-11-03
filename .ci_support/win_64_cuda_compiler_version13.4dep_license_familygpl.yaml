@@ -9,9 +9,11 @@ channel_targets:
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
-- None
+- '13.4'
 cxx_compiler:
 - vs2022
+dep_license_family:
+- gpl
 eigen_abi_devel:
 - 5.0.1
 flann:
@@ -24,8 +26,6 @@ glew:
 - '2.3'
 glog:
 - '0.7'
-gmp:
-- '6'
 libblas:
 - 3.9.* *netlib
 libboost_devel:
@@ -51,8 +51,6 @@ python:
 - 3.12.* *_cpython
 - 3.13.* *_cp313
 - 3.14.* *_cp314
-qt6_main:
-- '6.11'
 sqlite:
 - '3'
 suitesparse:
