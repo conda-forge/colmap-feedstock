@@ -47,7 +47,7 @@ libxcb:
 llvm_openmp:
 - '21'
 lz4_c:
-- '1.10'
+- '1.11'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 metis:

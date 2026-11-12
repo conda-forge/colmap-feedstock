@@ -49,11 +49,13 @@ libopenimageio:
 libxcb:
 - '1'
 lz4_c:
-- '1.10'
+- '1.11'
 metis:
 - 5.1.0
 numpy:
 - '2'
+onnxruntime_cpp:
+- 1.31.1
 pin_run_as_build:
   python:
     min_pin: x.x
