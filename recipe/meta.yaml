@@ -22,11 +22,13 @@ source:
       - use_eigen_cmake_config.patch
       - remove_boost_system_component.patch
       - fix_missing_cassert.patch
-      - 1809.patch  # [(cuda_compiler_version or "None").startswith("12")]
-      - 1840.patch  # [(cuda_compiler_version or "None").startswith("12")]
-      - 1823.patch  # [(cuda_compiler_version or "None").startswith("12")]
-      - 1838.patch  # [(cuda_compiler_version or "None").startswith("12")]
-      - 1841.patch  # [(cuda_compiler_version or "None").startswith("12")]
+      - fix_gcc15_poissonrecon.patch  # never-instantiated template bugs, errors since GCC 15
+      - 1809.patch  # [(cuda_compiler_version or "None") != "None"]
+      - 1840.patch  # [(cuda_compiler_version or "None") != "None"]
+      - 1823.patch  # [(cuda_compiler_version or "None") != "None"]
+      - 1838.patch  # [(cuda_compiler_version or "None") != "None"]
+      - 1841.patch  # [(cuda_compiler_version or "None") != "None"]
+      - fix_cuda13.patch  # [(cuda_compiler_version or "None") != "None"]
 
 build:
   number: {{ build }}
@@ -42,7 +44,7 @@ requirements:
     - {{ compiler('cuda') }}         # [(cuda_compiler_version or "None") != "None"]
     - cmake <4
     - make                           # [unix]
-    - pkg-config
+    - pkgconf
     - ninja
     - llvm-openmp                    # [osx]
     - libgomp                        # [linux]
@@ -81,8 +83,8 @@ requirements:
     - gmp
     - lz4-c
     - metis
-    - libcurand-dev                  # [(cuda_compiler_version or "None").startswith("12")]
-    - cuda-cudart-dev                # [win and (cuda_compiler_version or "None").startswith("12")]
+    - libcurand-dev                  # [(cuda_compiler_version or "None") != "None"]
+    - cuda-cudart-dev                # [win and (cuda_compiler_version or "None") != "None"]
   run:
     - vlfeat                         # [unix]
     - flann
@@ -113,7 +115,7 @@ about:
   license_file:
     - COPYING.txt
     - lib/LSD/LICENSE
-    - lib/PBA/LICENSE  # [not (cuda_compiler_version or "None").startswith("12")]
+    - lib/PBA/LICENSE  # [(cuda_compiler_version or "None") == "None"]
     - lib/PoissonRecon/LICENSE
     - lib/SiftGPU/LICENSE
   summary: COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface.
