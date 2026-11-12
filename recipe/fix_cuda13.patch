@@ -1,0 +1,13 @@
+diff --git a/lib/SiftGPU/ProgramCU.cu b/lib/SiftGPU/ProgramCU.cu
+index a8aafa0..700c26b 100644
+--- a/lib/SiftGPU/ProgramCU.cu
++++ b/lib/SiftGPU/ProgramCU.cu
+@@ -1218,7 +1218,7 @@ void ProgramCU::ComputeDescriptor(CuTexImage*list, CuTexImage* got, CuTexImage*
+ //////////////////////////////////////////////////////
+ void ProgramCU::FinishCUDA()
+ {
+-	cudaThreadSynchronize();
++	cudaDeviceSynchronize();
+ }
+ 
+ int ProgramCU::CheckErrorCUDA(const char* location)
