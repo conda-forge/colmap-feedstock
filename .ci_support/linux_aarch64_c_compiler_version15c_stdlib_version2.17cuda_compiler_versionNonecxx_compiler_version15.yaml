@@ -46,9 +46,6 @@ lz4_c:
 - '1.11'
 metis:
 - 5.1.0
-pin_run_as_build:
-  vlfeat:
-    max_pin: x.x.x
 qt_main:
 - '5.15'
 sqlite:
