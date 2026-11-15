@@ -55,13 +55,11 @@ metis:
 numpy:
 - '2'
 onnxruntime_cpp:
-- 1.31.1
+- 1.32.0
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-  vlfeat:
-    max_pin: x.x.x
 pybind11_abi:
 - '11'
 python:
